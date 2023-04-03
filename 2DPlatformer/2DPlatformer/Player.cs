@@ -19,8 +19,12 @@ namespace _2DPlatformer
         public Vector2 position;
         public Vector2 velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
-        public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight, leftScreen, rightScreen;
+        public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
 
+        // Define a KeyboardState object to store the current state of the keyboard
+        KeyboardState currentKeyboardState;
+        // Define a KeyboardState object to store the previous state of the keyboard
+        KeyboardState previousKeyboardState;
 
         SpriteEffects s = SpriteEffects.FlipHorizontally;
 
@@ -31,34 +35,33 @@ namespace _2DPlatformer
             hasJumped = true;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             platforms = newPlatforms;
-            leftScreen = new Rectangle(0, 0, 1, 1280);
-            leftScreen = new Rectangle(500, 0, 1, 1280);
         }
 
         public void Update(GameTime gameTime)
         {
             position += velocity;
 
+            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
-
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
-
             rectangleLeft = new Rectangle((int)position.X - 13, (int)position.Y, 1, (int)texture.Height);
+            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 13, (int)position.Y, 1, (int)texture.Height);
 
-            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 12, (int)position.Y, 1, (int)texture.Height);
+            // Store the current state of the keyboard
+            
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false)
             {
                 velocity.X = 7f;
-                rectangle.X = (int)position.X;
                 s = SpriteEffects.None;
             }
+
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false)
             {
                 velocity.X = -7f;
-                rectangle.Y = (int)position.X;
                 s = SpriteEffects.FlipHorizontally;
             }
+
             else
             {
                 velocity.X = 0;
@@ -67,10 +70,20 @@ namespace _2DPlatformer
             {
                 hasJumped = true;
                 position.Y -= 40f;
-                rectangle.Y = (int)position.Y;
                 velocity.Y = -9f;
                 isGrounded = false;
             }
+
+            currentKeyboardState = Keyboard.GetState();
+            if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space))
+            {
+                Debug.WriteLine("hej");
+                velocity.Y = 2f;
+                hasJumped = true;
+            }
+            previousKeyboardState = currentKeyboardState;
+
+
             if (hasJumped)
             {
                 float i = 1;
@@ -96,6 +109,8 @@ namespace _2DPlatformer
                 velocity.Y = 0f;
             }
 
+
+            //Kollisioner
             bool intersected = false;
             bool intersectedLeft = false;
             bool intersectedRight = false;
@@ -115,11 +130,11 @@ namespace _2DPlatformer
                     position.Y += 2;
                 }
 
-                if (rectangleRight.Intersects(platform.rectangle) || rectangleRight.Intersects(rightScreen))
+                if (rectangleRight.Intersects(platform.rectangle))
                 {
                     intersectedRight = true;
                 }
-                if (rectangleLeft.Intersects(platform.rectangle) || rectangleRight.Intersects(leftScreen))
+                if (rectangleLeft.Intersects(platform.rectangle))
                 {
                     intersectedLeft = true;
                 }
