@@ -74,11 +74,13 @@ namespace _2DPlatformer
                 isGrounded = false;
             }
 
+
+            //Varierande hopp beroende på hur länge man trycker Space
             currentKeyboardState = Keyboard.GetState();
-            if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space))
+            if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space) && velocity.Y < 0)
             {
                 Debug.WriteLine("hej");
-                velocity.Y = 2f;
+                velocity.Y = 0.3f;
                 hasJumped = true;
             }
             previousKeyboardState = currentKeyboardState;

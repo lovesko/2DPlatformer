@@ -52,3 +52,5 @@ C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug\net6.0\ref\2DPlatformer.dll
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug\net6.0\2DPlatformer.pdb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug\net6.0\2DPlatformer.genruntimeconfig.cache
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\big-grass.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\grass-floor.xnb

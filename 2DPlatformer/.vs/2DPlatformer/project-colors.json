@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "85394fe7-8740-4cb4-b782-dfb3906c22be": {
+      "ProjectGuid": "85394fe7-8740-4cb4-b782-dfb3906c22be",
+      "DisplayName": "2DPlatformer",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

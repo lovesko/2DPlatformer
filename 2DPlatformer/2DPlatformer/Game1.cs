@@ -14,7 +14,7 @@ namespace _2DPlatformer
         private SpriteBatch _spriteBatch;
         Player player;
         List<Platform> platforms = new List<Platform>();
-        Texture2D grassTexture;
+        Texture2D grassBlock, grassFloor;
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
         private Camera camera;
@@ -38,20 +38,21 @@ namespace _2DPlatformer
 
         protected override void LoadContent()
         {
-            grassTexture = Content.Load<Texture2D>("grass");
+            grassBlock = Content.Load<Texture2D>("big-grass");
+            grassFloor = Content.Load<Texture2D>("grass-floor");
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            platforms.Add(new Platform(grassTexture, new Vector2(200, 500)));
-            platforms.Add(new Platform(grassTexture, new Vector2(300, 400)));
-            platforms.Add(new Platform(grassTexture, new Vector2(500, 500)));
-            platforms.Add(new Platform(grassTexture, new Vector2(700, 300)));
-            platforms.Add(new Platform(grassTexture, new Vector2(900, 400)));
+            platforms.Add(new Platform(grassBlock, new Vector2(200, 500)));
+            platforms.Add(new Platform(grassBlock, new Vector2(300, 400)));
+            platforms.Add(new Platform(grassBlock, new Vector2(500, 500)));
+            platforms.Add(new Platform(grassBlock, new Vector2(700, 300)));
+            platforms.Add(new Platform(grassBlock, new Vector2(900, 400)));
 
             //GOLV
             for (int i = 0; i < 50; i++)
             {
-                platforms.Add(new Platform(grassTexture, new Vector2(grassTexture.Width * i, 720 - grassTexture.Height)));
+                platforms.Add(new Platform(grassFloor, new Vector2(grassFloor.Width * i, 720 - grassFloor.Height)));
             }
 
 
