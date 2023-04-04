@@ -18,7 +18,6 @@ namespace _2DPlatformer
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
         private Camera camera;
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -28,7 +27,6 @@ namespace _2DPlatformer
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
-
         protected override void Initialize()
         {
             // TODO: Add your initialization logic her
@@ -38,9 +36,8 @@ namespace _2DPlatformer
 
         protected override void LoadContent()
         {
-            grassBlock = Content.Load<Texture2D>("big-grass");
-            grassFloor = Content.Load<Texture2D>("grass-floor");
-
+            grassBlock = Content.Load<Texture2D>("grass");
+            grassFloor = Content.Load<Texture2D>("grass");
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             platforms.Add(new Platform(grassBlock, new Vector2(200, 500)));
@@ -55,38 +52,26 @@ namespace _2DPlatformer
                 platforms.Add(new Platform(grassFloor, new Vector2(grassFloor.Width * i, 720 - grassFloor.Height)));
             }
 
-
             player = new Player(Content.Load<Texture2D>("character"), new Vector2(50, 50), platforms);
-
             camera = new Camera();
-
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-
-
-
-            // TODO: Add your update logic here
-            player.Update(gameTime);
+            if (Keyboard.GetState().IsKeyDown(Keys.F))
+            {
+                _graphics.ToggleFullScreen();
+            }
+                player.Update(gameTime);
             camera.Follow(player);
-
-
-
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
             _spriteBatch.Begin(transformMatrix: camera.Transform);
             player.Draw(_spriteBatch);
             foreach (Platform platform in platforms)

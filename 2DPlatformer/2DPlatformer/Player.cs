@@ -72,24 +72,21 @@ namespace _2DPlatformer
                 position.Y -= 40f;
                 velocity.Y = -9f;
                 isGrounded = false;
-            }
-
+           }
 
             //Varierande hopp beroende på hur länge man trycker Space
             currentKeyboardState = Keyboard.GetState();
             if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space) && velocity.Y < 0)
             {
-                Debug.WriteLine("hej");
-                velocity.Y = 0.3f;
+                velocity.Y = -3f;
                 hasJumped = true;
             }
             previousKeyboardState = currentKeyboardState;
 
-
             if (hasJumped)
             {
-                float i = 1;
-                velocity.Y += 0.30f * i;
+                velocity.Y += 0.30f;
+                
             }
 
             if (isGrounded == false)
@@ -110,6 +107,8 @@ namespace _2DPlatformer
             {
                 velocity.Y = 0f;
             }
+
+
 
 
             //Kollisioner
