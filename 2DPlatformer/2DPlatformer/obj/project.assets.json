@@ -102,19 +102,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\loveng\\.nuget\\packages\\": {}
+    "C:\\Users\\young\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\loveng\\Documents\\GitHub\\2DPlatformer\\2DPlatformer\\2DPlatformer\\2DPlatformer.csproj",
+      "projectUniqueName": "C:\\Users\\young\\Documents\\GitHub\\2DPlatformer\\2DPlatformer\\2DPlatformer\\2DPlatformer.csproj",
       "projectName": "2DPlatformer",
-      "projectPath": "C:\\Users\\loveng\\Documents\\GitHub\\2DPlatformer\\2DPlatformer\\2DPlatformer\\2DPlatformer.csproj",
-      "packagesPath": "C:\\Users\\loveng\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\loveng\\Documents\\GitHub\\2DPlatformer\\2DPlatformer\\2DPlatformer\\obj\\",
+      "projectPath": "C:\\Users\\young\\Documents\\GitHub\\2DPlatformer\\2DPlatformer\\2DPlatformer\\2DPlatformer.csproj",
+      "packagesPath": "C:\\Users\\young\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\young\\Documents\\GitHub\\2DPlatformer\\2DPlatformer\\2DPlatformer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\loveng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\young\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -155,8 +155,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -165,7 +164,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -14,7 +14,7 @@ namespace _2DPlatformer
         private SpriteBatch _spriteBatch;
         Player player;
         List<Platform> platforms = new List<Platform>();
-        Texture2D grassBlock, grassFloor;
+        Texture2D grassBlock, grassFloor, deadlyTest;
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
         private Camera camera;
@@ -38,21 +38,26 @@ namespace _2DPlatformer
         {
             grassBlock = Content.Load<Texture2D>("grass");
             grassFloor = Content.Load<Texture2D>("grass");
+            deadlyTest = Content.Load<Texture2D>("big-grass");
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            platforms.Add(new Platform(grassBlock, new Vector2(200, 500)));
-            platforms.Add(new Platform(grassBlock, new Vector2(300, 400)));
-            platforms.Add(new Platform(grassBlock, new Vector2(500, 500)));
-            platforms.Add(new Platform(grassBlock, new Vector2(700, 300)));
-            platforms.Add(new Platform(grassBlock, new Vector2(900, 400)));
+            platforms.Add(new Platform(grassBlock, new Vector2(200, 500), false));
+            platforms.Add(new Platform(grassBlock, new Vector2(300, 400), false));
+            platforms.Add(new Platform(grassBlock, new Vector2(500, 500), false));
+            platforms.Add(new Platform(grassBlock, new Vector2(700, 300), false));
+
+            platforms.Add(new Platform(deadlyTest, new Vector2(900, 500), true));
+
+
 
             //GOLV
             for (int i = 0; i < 50; i++)
             {
-                platforms.Add(new Platform(grassFloor, new Vector2(grassFloor.Width * i, 720 - grassFloor.Height)));
+                platforms.Add(new Platform(grassFloor, new Vector2(grassFloor.Width * i, 720 - grassFloor.Height), false));
             }
 
-            player = new Player(Content.Load<Texture2D>("character"), new Vector2(50, 50), platforms);
+            player = new Player(Content.Load<Texture2D>("Capture"), new Vector2(50, 50), platforms);
             camera = new Camera();
         }
 

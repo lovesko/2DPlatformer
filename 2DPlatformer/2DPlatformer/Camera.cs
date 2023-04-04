@@ -16,9 +16,10 @@ namespace _2DPlatformer
         public void Follow(Player target)
         {
             var position = Matrix.CreateTranslation(
-                -target.position.X - (target.rectangle.Width / 2),
+                MathHelper.Clamp(-target.position.X - (target.rectangle.Width / 2), -1280, -650),
                 -target.position.Y - (target.rectangle.Height / 2),
                 0);
+            
             var offset = Matrix.CreateTranslation(
                     Game1.screenWidth / 2,
                     Game1.screenHeight / 2,

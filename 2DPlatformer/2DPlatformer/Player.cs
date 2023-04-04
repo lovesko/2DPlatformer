@@ -37,6 +37,12 @@ namespace _2DPlatformer
             platforms = newPlatforms;
         }
 
+        public void Die()
+        {
+            position.Y = 50;
+            position.X = 50;
+        }
+
         public void Update(GameTime gameTime)
         {
             position += velocity;
@@ -47,32 +53,30 @@ namespace _2DPlatformer
             rectangleLeft = new Rectangle((int)position.X - 13, (int)position.Y, 1, (int)texture.Height);
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 13, (int)position.Y, 1, (int)texture.Height);
 
-            // Store the current state of the keyboard
-            
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false)
+            #region input
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false || 
+                Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
             {
                 velocity.X = 7f;
                 s = SpriteEffects.None;
             }
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false)
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false ||
+                     Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false)
             {
                 velocity.X = -7f;
                 s = SpriteEffects.FlipHorizontally;
             }
-
             else
             {
                 velocity.X = 0;
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
             {
                 hasJumped = true;
-                position.Y -= 40f;
-                velocity.Y = -9f;
+                velocity.Y = -12f;
                 isGrounded = false;
-           }
+            }
 
             //Varierande hopp beroende på hur länge man trycker Space
             currentKeyboardState = Keyboard.GetState();
@@ -82,11 +86,12 @@ namespace _2DPlatformer
                 hasJumped = true;
             }
             previousKeyboardState = currentKeyboardState;
+            #endregion
 
+            #region gravity
             if (hasJumped)
             {
-                velocity.Y += 0.30f;
-                
+                velocity.Y += 0.50f;
             }
 
             if (isGrounded == false)
@@ -107,14 +112,16 @@ namespace _2DPlatformer
             {
                 velocity.Y = 0f;
             }
+            #endregion
 
 
 
-
-            //Kollisioner
+            #region kollisioner
             bool intersected = false;
             bool intersectedLeft = false;
             bool intersectedRight = false;
+
+
             foreach (Platform platform in platforms)
             {
                 if (rectangleFeet.Intersects(platform.rectangle))
@@ -123,19 +130,40 @@ namespace _2DPlatformer
                     hasJumped = false;
                     isGrounded = true;
                     position.Y = platform.rectangle.Top - texture.Height;
+                    if (platform.isDeadly)
+                    {
+                        Die();
+                    }
                 }
 
                 if (rectangleHead.Intersects(platform.rectangle))
                 {
                     velocity.Y = 0f;
                     position.Y += 2;
+                    if (platform.isDeadly)
+                    {
+                        Die();
+                    }
                 }
 
                 if (rectangleRight.Intersects(platform.rectangle))
                 {
                     intersectedRight = true;
+                    if (platform.isDeadly)
+                    {
+                        Die();
+                    }
                 }
                 if (rectangleLeft.Intersects(platform.rectangle))
+                {
+                    intersectedLeft = true;
+                    if (platform.isDeadly)
+                    {
+                        Die();
+                    }
+                }
+
+                if (position.X <= texture.Width / 2)
                 {
                     intersectedLeft = true;
                 }
@@ -143,6 +171,7 @@ namespace _2DPlatformer
             isGrounded = intersected;
             blockedLeft = intersectedLeft;
             blockedRight = intersectedRight;
+            #endregion
         }
         public void Draw(SpriteBatch spriteBatch)
         {
