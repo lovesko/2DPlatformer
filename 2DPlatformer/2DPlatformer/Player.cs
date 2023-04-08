@@ -15,6 +15,7 @@ namespace _2DPlatformer
     internal class Player
     {
         List<Platform> platforms;
+        List<Enemy> enemies;
         Texture2D texture;
         public Vector2 position;
         public Vector2 velocity;
@@ -28,13 +29,14 @@ namespace _2DPlatformer
 
         SpriteEffects s = SpriteEffects.FlipHorizontally;
 
-        public Player(Texture2D newTexture, Vector2 newPosition, List<Platform> newPlatforms)
+        public Player(Texture2D newTexture, Vector2 newPosition, List<Platform> newPlatforms, List<Enemy> newEnemies)
         {
             texture = newTexture;
             position = newPosition;
             hasJumped = true;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             platforms = newPlatforms;
+            enemies = newEnemies;
         }
 
         public void Die()
@@ -46,24 +48,25 @@ namespace _2DPlatformer
         public void Update(GameTime gameTime)
         {
             position += velocity;
+            //Debug.WriteLine("Position: " + position.X + "," + position.Y);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
-            rectangleLeft = new Rectangle((int)position.X - 13, (int)position.Y, 1, (int)texture.Height);
-            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 13, (int)position.Y, 1, (int)texture.Height);
+            rectangleLeft = new Rectangle((int)position.X - 10, (int)position.Y, 1, (int)texture.Height - 1);
+            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 8, (int)position.Y, 1, (int)texture.Height - 3);
 
             #region input
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false || 
                 Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
             {
-                velocity.X = 7f;
+                velocity.X = 5f;
                 s = SpriteEffects.None;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false ||
                      Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false)
             {
-                velocity.X = -7f;
+                velocity.X = -5f;
                 s = SpriteEffects.FlipHorizontally;
             }
             else
@@ -102,12 +105,6 @@ namespace _2DPlatformer
             {
                 velocity.Y = 0f;
             }
-
-            if (position.Y + texture.Height >= 720)
-            {
-                hasJumped = false;
-                isGrounded = true;
-            }
             if (!hasJumped)
             {
                 velocity.Y = 0f;
@@ -116,7 +113,8 @@ namespace _2DPlatformer
 
 
 
-            #region kollisioner
+            #region kollisioner med plattformar
+
             bool intersected = false;
             bool intersectedLeft = false;
             bool intersectedRight = false;
@@ -163,15 +161,38 @@ namespace _2DPlatformer
                     }
                 }
 
-                if (position.X <= texture.Width / 2)
+                if (position.X <= texture.Width / 2 -5)
                 {
                     intersectedLeft = true;
                 }
+                if (position.Y >= 720)
+                {
+                    Die();
+                }
             }
+
             isGrounded = intersected;
             blockedLeft = intersectedLeft;
             blockedRight = intersectedRight;
             #endregion
+
+
+            #region kollisioner med fiender
+
+            foreach (Enemy enemy in enemies)
+            {
+                if (rectangle.Intersects(enemy.rectangle))
+                {
+                    Die();
+                }
+                if (rectangleFeet.Intersects(enemy.rectangleHead))
+                {
+                    Debug.WriteLine("död");
+                }
+            }
+
+            #endregion
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {

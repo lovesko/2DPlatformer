@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace _2DPlatformer
 {
-    internal class Platform
+    public class Platform
     {
         public Texture2D texture;
         public Vector2 position;

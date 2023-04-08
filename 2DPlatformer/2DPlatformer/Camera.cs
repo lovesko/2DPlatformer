@@ -16,7 +16,7 @@ namespace _2DPlatformer
         public void Follow(Player target)
         {
             var position = Matrix.CreateTranslation(
-                MathHelper.Clamp(-target.position.X - (target.rectangle.Width / 2), -1280, -650),
+                MathHelper.Clamp(-target.position.X - (target.rectangle.Width / 2), -538745873475, -650),
                 -target.position.Y - (target.rectangle.Height / 2),
                 0);
             

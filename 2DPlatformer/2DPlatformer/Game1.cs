@@ -14,10 +14,25 @@ namespace _2DPlatformer
         private SpriteBatch _spriteBatch;
         Player player;
         List<Platform> platforms = new List<Platform>();
-        Texture2D grassBlock, grassFloor, deadlyTest;
+        public static List<Enemy> enemies = new List<Enemy>();
+        Texture2D brick, small_brick;
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
         private Camera camera;
+
+
+        int[,] map = new int[,] {
+            { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        };
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -36,28 +51,30 @@ namespace _2DPlatformer
 
         protected override void LoadContent()
         {
-            grassBlock = Content.Load<Texture2D>("grass");
-            grassFloor = Content.Load<Texture2D>("grass");
-            deadlyTest = Content.Load<Texture2D>("big-grass");
+            brick = Content.Load<Texture2D>("brick");
+            small_brick = Content.Load<Texture2D>("brick-small");
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            platforms.Add(new Platform(grassBlock, new Vector2(200, 500), false));
-            platforms.Add(new Platform(grassBlock, new Vector2(300, 400), false));
-            platforms.Add(new Platform(grassBlock, new Vector2(500, 500), false));
-            platforms.Add(new Platform(grassBlock, new Vector2(700, 300), false));
-
-            platforms.Add(new Platform(deadlyTest, new Vector2(900, 500), true));
-
-
-
-            //GOLV
-            for (int i = 0; i < 50; i++)
+            for (int x = 0; x < map.GetLength(1); x++)
             {
-                platforms.Add(new Platform(grassFloor, new Vector2(grassFloor.Width * i, 720 - grassFloor.Height), false));
+                for (int y = 0; y < map.GetLength(0); y++)
+                {
+                    int number = map[y, x];
+
+                    if (number == 1)
+                    {
+                        platforms.Add(new Platform(small_brick, new Vector2(x * small_brick.Width, y * small_brick.Width), false));
+                    }
+                }
             }
 
-            player = new Player(Content.Load<Texture2D>("Capture"), new Vector2(50, 50), platforms);
+            player = new Player(Content.Load<Texture2D>("character"), new Vector2(50, 50), platforms, enemies);
+
+            enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(428, -99), platforms));
+            enemies.Add(new Enemy(Content.Load<Texture2D>("enemy"), new Vector2(905, -99), platforms));
+
+
             camera = new Camera();
         }
 
@@ -69,7 +86,11 @@ namespace _2DPlatformer
             {
                 _graphics.ToggleFullScreen();
             }
-                player.Update(gameTime);
+            player.Update(gameTime);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Update(gameTime);
+            }
             camera.Follow(player);
             base.Update(gameTime);
         }
@@ -79,6 +100,10 @@ namespace _2DPlatformer
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin(transformMatrix: camera.Transform);
             player.Draw(_spriteBatch);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Draw(_spriteBatch);
+            }
             foreach (Platform platform in platforms)
             {
                 platform.Draw(_spriteBatch);
