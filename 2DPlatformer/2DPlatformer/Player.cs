@@ -48,30 +48,35 @@ namespace _2DPlatformer
         public void Update(GameTime gameTime)
         {
             position += velocity;
-            //Debug.WriteLine("Position: " + position.X + "," + position.Y);
+            Debug.WriteLine("Position: " + position.X + "," + position.Y);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
-            rectangleLeft = new Rectangle((int)position.X - 10, (int)position.Y, 1, (int)texture.Height - 1);
-            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 8, (int)position.Y, 1, (int)texture.Height - 3);
+            rectangleLeft = new Rectangle((int)position.X - 8, (int)position.Y, 1, (int)texture.Height - 1);
+            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);
 
             #region input
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false || 
                 Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
             {
-                velocity.X = 5f;
+                velocity.X = 4f;
                 s = SpriteEffects.None;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false ||
                      Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false)
             {
-                velocity.X = -5f;
+                velocity.X = -4f;
                 s = SpriteEffects.FlipHorizontally;
             }
             else
             {
                 velocity.X = 0;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
@@ -110,8 +115,6 @@ namespace _2DPlatformer
                 velocity.Y = 0f;
             }
             #endregion
-
-
 
             #region kollisioner med plattformar
 
@@ -179,15 +182,20 @@ namespace _2DPlatformer
 
             #region kollisioner med fiender
 
-            foreach (Enemy enemy in enemies)
+            for (int i = enemies.Count - 1; i >= 0; i--)
             {
-                if (rectangle.Intersects(enemy.rectangle))
+                if (rectangleFeet.Intersects(enemies[i].rectangleHead))
+                {
+                    hasJumped = true;
+                    velocity.Y = -7f;
+                    isGrounded = false;
+
+                    enemies.RemoveAt(i);
+                    Game1.enemies = enemies;
+                }
+                else if (rectangle.Intersects(enemies[i].rectangle))
                 {
                     Die();
-                }
-                if (rectangleFeet.Intersects(enemy.rectangleHead))
-                {
-                    Debug.WriteLine("död");
                 }
             }
 

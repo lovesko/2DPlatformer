@@ -20,6 +20,7 @@ namespace _2DPlatformer
         public Rectangle rectangle, turningRectangle, rectangleHead;
         bool intersected, isGrounded;
         bool movingRight;
+        public bool isDead = false;
 
         public Enemy(Texture2D newTexture, Vector2 newPosition, List<Platform> newPlatforms)
         {
@@ -34,7 +35,7 @@ namespace _2DPlatformer
         {
             position += velocity;
             rectangle = new Rectangle((int)position.X, (int)position.Y + 10, (int)texture.Width, (int)texture.Height + 2);
-            rectangleHead = new Rectangle((int)position.X, (int)position.Y + 2, (int)texture.Width, 2);
+            rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width + 10, 10);
 
             if (movingRight)
             {
