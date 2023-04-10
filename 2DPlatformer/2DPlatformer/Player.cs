@@ -123,48 +123,53 @@ namespace _2DPlatformer
             bool intersectedRight = false;
 
 
-            foreach (Platform platform in platforms)
+            for (int i = 0; i < platforms.Count; i++)
             {
-                if (rectangleFeet.Intersects(platform.rectangle))
+                if (rectangleFeet.Intersects(platforms[i].rectangle))
                 {
                     intersected = true;
                     hasJumped = false;
                     isGrounded = true;
-                    position.Y = platform.rectangle.Top - texture.Height;
-                    if (platform.isDeadly)
+                    position.Y = platforms[i].rectangle.Top - texture.Height;
+                    if (platforms[i].isDeadly)
                     {
                         Die();
                     }
                 }
 
-                if (rectangleHead.Intersects(platform.rectangle))
+                if (rectangleHead.Intersects(platforms[i].rectangle))
                 {
                     velocity.Y = 0f;
                     position.Y += 2;
-                    if (platform.isDeadly)
+                    if (platforms[i].isDeadly)
                     {
                         Die();
                     }
+                    if (platforms[i].isBreakable)
+                    {
+                        platforms.Remove(platforms[i]);
+                        Game1.platforms = platforms;
+                    }
                 }
 
-                if (rectangleRight.Intersects(platform.rectangle))
+                if (rectangleRight.Intersects(platforms[i].rectangle))
                 {
                     intersectedRight = true;
-                    if (platform.isDeadly)
+                    if (platforms[i].isDeadly)
                     {
                         Die();
                     }
                 }
-                if (rectangleLeft.Intersects(platform.rectangle))
+                if (rectangleLeft.Intersects(platforms[i].rectangle))
                 {
                     intersectedLeft = true;
-                    if (platform.isDeadly)
+                    if (platforms[i].isDeadly)
                     {
                         Die();
                     }
                 }
 
-                if (position.X <= texture.Width / 2 -5)
+                if (position.X <= texture.Width / 2 -10)
                 {
                     intersectedLeft = true;
                 }
