@@ -198,7 +198,6 @@ namespace _2DPlatformer
             blockedRight = intersectedRight;
             #endregion
 
-
             #region kollisioner med fiender
 
             for (int i = enemies.Count - 1; i >= 0; i--)
