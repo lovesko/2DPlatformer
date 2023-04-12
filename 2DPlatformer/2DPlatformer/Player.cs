@@ -44,25 +44,31 @@ namespace _2DPlatformer
         {
             position.Y = 0;
             position.X = 0;
+            
             for (int i = 0; i < enemies.Count;i++)
             {
                 enemies.RemoveAt(i);
             }
             Game1.enemies = enemies;
-
             for (int i = 0; i < Game1.coins.Count; i++)
             {
                 Game1.coins.RemoveAt(i);
             }
-            
+            for (int i = 0; i < platforms.Count; i++)
+            {
+                platforms.RemoveAt(i);
+            }
+            Game1.platforms = platforms;
+
             score = 0;
             Map.Generate(platforms);
+            
         }
 
         public void Update(GameTime gameTime)
         {
             position += velocity;
-            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|||| Score: " + score);
+            //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|||| Score: " + score);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -136,18 +142,20 @@ namespace _2DPlatformer
             bool intersectedLeft = false;
             bool intersectedRight = false;
 
-
             for (int i = 0; i < platforms.Count; i++)
             {
                 if (rectangleFeet.Intersects(platforms[i].rectangle))
                 {
-                    intersected = true;
-                    hasJumped = false;
-                    isGrounded = true;
-                    position.Y = platforms[i].rectangle.Top - texture.Height;
                     if (platforms[i].isDeadly)
                     {
                         Die();
+                    }
+                    else
+                    {
+                        intersected = true;
+                        hasJumped = false;
+                        isGrounded = true;
+                        position.Y = platforms[i].rectangle.Top - texture.Height;
                     }
                 }
 
@@ -208,6 +216,7 @@ namespace _2DPlatformer
                     velocity.Y = -7f;
                     isGrounded = false;
                     score += 100;
+                    Game1.score_str = score.ToString();
 
                     enemies.RemoveAt(i);
                     Game1.enemies = enemies;
@@ -228,6 +237,7 @@ namespace _2DPlatformer
                 {
                     Game1.coins.RemoveAt(i);
                     score += 50;
+                    Game1.score_str = score.ToString();
                 }
             }
 

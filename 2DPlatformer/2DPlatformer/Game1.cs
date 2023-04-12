@@ -22,10 +22,16 @@ namespace _2DPlatformer
 
         public static List<Platform> platforms = new List<Platform>();
         public static List<Enemy> enemies = new List<Enemy>();
-        public static List<Enemy> enemiesReset = new List<Enemy>();
         public static List<Coin> coins = new List<Coin>();
 
-        public static Texture2D brick, block, enemy_texture, breakable_brick, coin_texture;
+        public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture;
+
+        SpriteFont score_font;
+        public static string score_str = "0";
+        public static Vector2 score_pos;
+
+        
+
 
         public Game1()
         {
@@ -35,6 +41,10 @@ namespace _2DPlatformer
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
+            
+            
+
+            
         }
         protected override void Initialize()
         {
@@ -45,15 +55,19 @@ namespace _2DPlatformer
 
         protected override void LoadContent()
         {
-            brick = Content.Load<Texture2D>("brick");
-            block = Content.Load<Texture2D>("block");
-            enemy_texture = Content.Load<Texture2D>("enemy");
-            breakable_brick = Content.Load<Texture2D>("breakable-brick");
-            coin_texture = Content.Load<Texture2D>("coin");
-
             map = new Map();
-            player = new Player(Content.Load<Texture2D>("character"), new Vector2(38, 157), platforms, enemies);
+            player = new Player(Content.Load<Texture2D>("Sprites/character"), new Vector2(38, 157), platforms, enemies);
             camera = new Camera();
+
+            dirt_texture = Content.Load<Texture2D>("Sprites/ground6");
+            grass2_texture = Content.Load<Texture2D>("Sprites/ground4");
+            grass_texture = Content.Load<Texture2D>("Sprites/ground11");
+            spike_texture = Content.Load<Texture2D>("Sprites/spike");
+            coin_texture = Content.Load<Texture2D>("Sprites/coin1");
+            enemy_texture = Content.Load<Texture2D>("Sprites/mushroom");
+
+            score_font = Content.Load<SpriteFont>("Fonts/font");
+            score_pos = new Vector2(player.position.X + GraphicsDevice.Viewport.Width, 0);
 
             Map.Generate(platforms);
 
@@ -74,6 +88,16 @@ namespace _2DPlatformer
                 enemy.Update(gameTime);
             }
             camera.Follow(player);
+
+            if(player.position.X < 625) //när kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position. Kameran börjar röra sig ~625.
+            {
+                score_pos = new Vector2(GraphicsDevice.Viewport.Width - 100, -200);
+            }
+            else
+            {
+                score_pos = new Vector2(player.position.X + (GraphicsDevice.Viewport.Width / 2) - 85, -200);
+            }
+            
             base.Update(gameTime);
         }
 
@@ -83,9 +107,9 @@ namespace _2DPlatformer
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             player.Draw(_spriteBatch);
-            for (int i = 0; i < enemies.Count; i++)
+            foreach (Enemy enemy in enemies)
             {
-                enemies[i].Draw(_spriteBatch);
+                enemy.Draw(_spriteBatch);
             }
             foreach (Platform platform in platforms)
             {
@@ -95,6 +119,8 @@ namespace _2DPlatformer
             {
                 coin.Draw(_spriteBatch);
             }
+            _spriteBatch.DrawString(score_font, score_str, score_pos, Color.White);
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }

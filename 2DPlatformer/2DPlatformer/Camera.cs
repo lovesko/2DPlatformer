@@ -11,6 +11,8 @@ namespace _2DPlatformer
 {
     internal class Camera
     {
+
+
         public Matrix Transform { get; private set; }
 
         public void Follow(Player target)
