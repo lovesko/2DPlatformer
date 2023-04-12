@@ -21,6 +21,7 @@ namespace _2DPlatformer
         public Vector2 velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
+        int score = 0;
 
         // Define a KeyboardState object to store the current state of the keyboard
         KeyboardState currentKeyboardState;
@@ -41,19 +42,32 @@ namespace _2DPlatformer
 
         public void Die()
         {
-            position.Y = 50;
-            position.X = 50;
+            position.Y = 0;
+            position.X = 0;
+            for (int i = 0; i < enemies.Count;i++)
+            {
+                enemies.RemoveAt(i);
+            }
+            Game1.enemies = enemies;
+
+            for (int i = 0; i < Game1.coins.Count; i++)
+            {
+                Game1.coins.RemoveAt(i);
+            }
+            
+            score = 0;
+            Map.Generate(platforms);
         }
 
         public void Update(GameTime gameTime)
         {
             position += velocity;
-            Debug.WriteLine("Position: " + position.X + "," + position.Y);
+            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|||| Score: " + score);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
-            rectangleLeft = new Rectangle((int)position.X - 8, (int)position.Y, 1, (int)texture.Height - 1);
+            rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1);
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);
 
             #region input
@@ -194,6 +208,7 @@ namespace _2DPlatformer
                     hasJumped = true;
                     velocity.Y = -7f;
                     isGrounded = false;
+                    score += 100;
 
                     enemies.RemoveAt(i);
                     Game1.enemies = enemies;
@@ -201,6 +216,19 @@ namespace _2DPlatformer
                 else if (rectangle.Intersects(enemies[i].rectangle))
                 {
                     Die();
+                }
+            }
+
+            #endregion
+
+            #region kollisioner med coins
+
+            for (int i = 0; i < Game1.coins.Count; i++)
+            {
+                if (rectangle.Intersects(Game1.coins[i].rectangle))
+                {
+                    Game1.coins.RemoveAt(i);
+                    score += 50;
                 }
             }
 

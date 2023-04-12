@@ -14,9 +14,15 @@ namespace _2DPlatformer
         private SpriteBatch _spriteBatch;
         Player player;
         Map map;
+
+
         public static List<Platform> platforms = new List<Platform>();
         public static List<Enemy> enemies = new List<Enemy>();
-        public static Texture2D brick, block, enemy_texture, breakable_brick;
+        public static List<Enemy> enemiesReset = new List<Enemy>();
+        public static List<Coin> coins = new List<Coin>();
+
+
+        public static Texture2D brick, block, enemy_texture, breakable_brick, coin_texture;
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
         private Camera camera;
@@ -46,16 +52,23 @@ namespace _2DPlatformer
             block = Content.Load<Texture2D>("block");
             enemy_texture = Content.Load<Texture2D>("enemy");
             breakable_brick = Content.Load<Texture2D>("breakable-brick");
+            coin_texture = Content.Load<Texture2D>("coin");
 
             map = new Map();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            map.Generate(platforms);
+            Map.Generate(platforms);
 
             player = new Player(Content.Load<Texture2D>("character"), new Vector2(38, 157), platforms, enemies);
 
-            enemies.Add(new Enemy(enemy_texture, new Vector2(428, -99), platforms));
-            enemies.Add(new Enemy(enemy_texture, new Vector2(905, -99), platforms));
+            
+
+            //enemies.Add(new Enemy(enemy_texture, new Vector2(428, -35), platforms));
+            //enemies.Add(new Enemy(enemy_texture, new Vector2(905, -35), platforms));
+
+            //enemiesReset.Add(new Enemy(enemy_texture, new Vector2(428, -35), platforms));
+            //enemiesReset.Add(new Enemy(enemy_texture, new Vector2(905, -35), platforms));
+
 
 
             camera = new Camera();
@@ -84,14 +97,19 @@ namespace _2DPlatformer
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             player.Draw(_spriteBatch);
-            foreach (Enemy enemy in enemies)
+            for (int i =0; i < enemies.Count; i++)
             {
-                enemy.Draw(_spriteBatch);
+                enemies[i].Draw(_spriteBatch);
             }
             foreach (Platform platform in platforms)
             {
                 platform.Draw(_spriteBatch);
             }
+            foreach (Coin coin in coins)
+            {
+                coin.Draw(_spriteBatch);
+            }
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }
