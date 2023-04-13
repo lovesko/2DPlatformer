@@ -67,6 +67,13 @@ namespace _2DPlatformer.States
             {
                 score_pos = new Vector2(player.position.X + (_graphics.Viewport.Width / 2) - 85, -200);
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                _game.ChangeState(new MenuState(_game, _graphics, _content));
+                player.Die();
+            }
+
         }
         public override void PostUpdate(GameTime gameTime)
         {

@@ -24,9 +24,7 @@ namespace _2DPlatformer
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
         int score = 0;
 
-        // Define a KeyboardState object to store the current state of the keyboard
         KeyboardState currentKeyboardState;
-        // Define a KeyboardState object to store the previous state of the keyboard
         KeyboardState previousKeyboardState;
 
         SpriteEffects s = SpriteEffects.FlipHorizontally;
@@ -105,7 +103,7 @@ namespace _2DPlatformer
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
             {
                 hasJumped = true;
-                velocity.Y = -12f;
+                velocity.Y = -10f;
                 isGrounded = false;
             }
 

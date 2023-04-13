@@ -13,15 +13,10 @@ namespace _2DPlatformer
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
-        
-
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
-
         private State _currentState;
         private State _nextState;
-
 
         public Game1()
         {
@@ -30,60 +25,51 @@ namespace _2DPlatformer
             _graphics.PreferredBackBufferHeight = screenHeight;  
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
-            IsMouseVisible = false;
-            
-            
-
-            
+            IsMouseVisible = true;
         }
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic her
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            
-
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             _currentState = new MenuState(this, GraphicsDevice, Content);
         }
 
         protected override void Update(GameTime gameTime)
         {
-
             if (_nextState != null)
             {
                 _currentState = _nextState;
                 _currentState.LoadContent();
-
                 _nextState = null;
             }
-
             _currentState.Update(gameTime);
-            _currentState.PostUpdate(gameTime);
-
-
-            
-            
+            _currentState.PostUpdate(gameTime); 
             base.Update(gameTime);
         }
-
         public void ChangeState(State state)
         {
+            if (IsMouseVisible)
+            {
+                IsMouseVisible=false;
+            }
+            else
+            {
+                IsMouseVisible=true;
+            }
             _nextState = state;
         }
-
+        public void Quit()
+        {
+            this.Exit();
+        }
         protected override void Draw(GameTime gameTime)
         {
-            
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.LightSkyBlue);
             _currentState.Draw(gameTime, _spriteBatch);
-
             base.Draw(gameTime);
         }
     }
