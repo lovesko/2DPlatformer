@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using _2DPlatformer.States;
 
 namespace _2DPlatformer
 {
@@ -38,27 +39,27 @@ namespace _2DPlatformer
                     switch (number)
                     {
                         case 1:
-                            platforms.Add(new Platform(Game1.grass_texture, new Vector2(x * Game1.grass_texture.Width, y * Game1.grass_texture.Width), false, false));
+                            platforms.Add(new Platform(GameState.grass_texture, new Vector2(x * GameState.grass_texture.Width, y * GameState.grass_texture.Width), false, false));
                             break;
                         case 2:
-                            platforms.Add(new Platform(Game1.dirt_texture, new Vector2(x * Game1.dirt_texture.Width, y * Game1.dirt_texture.Width), false, false));
+                            platforms.Add(new Platform(GameState.dirt_texture, new Vector2(x * GameState.dirt_texture.Width, y * GameState.dirt_texture.Width), false, false));
                             break;
                         case 3:
-                            platforms.Add(new Platform(Game1.grass2_texture, new Vector2(x * Game1.grass2_texture.Width, y * Game1.grass2_texture.Width), false, false));
+                            platforms.Add(new Platform(GameState.grass2_texture, new Vector2(x * GameState.grass2_texture.Width, y * GameState.grass2_texture.Width), false, false));
                             break;
                         case 4:
-                            Game1.coins.Add(new Coin(Game1.coin_texture, new Vector2(x * 64 + 16, y * 64)));
+                            GameState.coins.Add(new Coin(GameState.coin_texture, new Vector2(x * 64 + 16, y * 64)));
                             break;
                         case 5:
-                            Game1.enemies.Add(new Enemy(Game1.enemy_texture, new Vector2(x * 64, y), platforms));
+                            GameState.enemies.Add(new Enemy(GameState.enemy_texture, new Vector2(x * 64, y), platforms));
                             break;
                         case 6:
-                            platforms.Add(new Platform(Game1.spike_texture, new Vector2(x * Game1.spike_texture.Width, y * Game1.spike_texture.Width), true, false));
+                            platforms.Add(new Platform(GameState.spike_texture, new Vector2(x * GameState.spike_texture.Width, y * GameState.spike_texture.Width), true, false));
                             break;
                     }
                 }
             }
-            Game1.platforms = platforms;
+            GameState.platforms = platforms;
         }
 
 

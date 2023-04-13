@@ -8,6 +8,7 @@ using _2DPlatformer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using _2DPlatformer.States;
 
 namespace _2DPlatformer
 {
@@ -44,23 +45,25 @@ namespace _2DPlatformer
         {
             position.Y = 0;
             position.X = 0;
-            
+            score = 0;
+            GameState.score_str = score.ToString();
+
             for (int i = 0; i < enemies.Count;i++)
             {
                 enemies.RemoveAt(i);
             }
-            Game1.enemies = enemies;
-            for (int i = 0; i < Game1.coins.Count; i++)
+            GameState.enemies = enemies;
+            for (int i = 0; i < GameState.coins.Count; i++)
             {
-                Game1.coins.RemoveAt(i);
+                GameState.coins.RemoveAt(i);
             }
             for (int i = 0; i < platforms.Count; i++)
             {
                 platforms.RemoveAt(i);
             }
-            Game1.platforms = platforms;
+            GameState.platforms = platforms;
 
-            score = 0;
+            
             Map.Generate(platforms);
             
         }
@@ -170,7 +173,7 @@ namespace _2DPlatformer
                     if (platforms[i].isBreakable)
                     {
                         platforms.Remove(platforms[i]);
-                        Game1.platforms = platforms;
+                        GameState.platforms = platforms;
                     }
                 }
 
@@ -216,10 +219,10 @@ namespace _2DPlatformer
                     velocity.Y = -7f;
                     isGrounded = false;
                     score += 100;
-                    Game1.score_str = score.ToString();
+                    GameState.score_str = score.ToString();
 
                     enemies.RemoveAt(i);
-                    Game1.enemies = enemies;
+                    GameState.enemies = enemies;
                 }
                 else if (rectangle.Intersects(enemies[i].rectangle))
                 {
@@ -231,13 +234,13 @@ namespace _2DPlatformer
 
             #region kollisioner med coins
 
-            for (int i = 0; i < Game1.coins.Count; i++)
+            for (int i = 0; i < GameState.coins.Count; i++)
             {
-                if (rectangle.Intersects(Game1.coins[i].rectangle))
+                if (rectangle.Intersects(GameState.coins[i].rectangle))
                 {
-                    Game1.coins.RemoveAt(i);
+                    GameState.coins.RemoveAt(i);
                     score += 50;
-                    Game1.score_str = score.ToString();
+                    GameState.score_str = score.ToString();
                 }
             }
 

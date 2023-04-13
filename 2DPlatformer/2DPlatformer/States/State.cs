@@ -9,30 +9,25 @@ using System.Threading.Tasks;
 
 namespace _2DPlatformer.States
 {
-    //https://www.youtube.com/watch?v=76Mz7ClJLoE
     public abstract class State
     {
-        protected ContentManager content;
+        protected ContentManager _content;
 
-        protected GraphicsDevice graphics;
+        protected GraphicsDevice _graphics;
 
-        protected Game1 game;
+        protected Game1 _game;
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        
+        public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {
-
+            _content = content;
+            _graphics = graphicsDevice;
+            _game = game;
         }
 
+        public abstract void LoadContent();
+        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
         public abstract void PostUpdate(GameTime gameTime);
-
         public abstract void Update(GameTime gameTime);
-
-        public State(Game1 newGame, GraphicsDevice newGraphicsDevice, ContentManager newContent)
-        {
-            content = newContent;
-            graphics = newGraphicsDevice;
-            game = newGame;
-        }
-
     }
 }
