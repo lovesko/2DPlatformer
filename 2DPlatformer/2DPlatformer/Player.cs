@@ -13,7 +13,7 @@ using _2DPlatformer.States;
 namespace _2DPlatformer
 {
 
-    internal class Player
+    public class Player
     {
         List<Platform> platforms;
         List<Enemy> enemies;
@@ -23,6 +23,7 @@ namespace _2DPlatformer
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
         int score = 0;
+        public bool win = false;
 
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
@@ -145,6 +146,11 @@ namespace _2DPlatformer
 
             for (int i = 0; i < platforms.Count; i++)
             {
+                if (rectangle.Intersects(platforms[i].rectangle) && platforms[i].texture == GameState.sign_texture) // om spelaren rör en skylt ska han vinna
+                {
+                    win = true;
+                }
+
                 if (rectangleFeet.Intersects(platforms[i].rectangle))
                 {
                     if (platforms[i].isDeadly)
@@ -175,7 +181,7 @@ namespace _2DPlatformer
                     }
                 }
 
-                if (rectangleRight.Intersects(platforms[i].rectangle))
+                if (rectangleRight.Intersects(platforms[i].rectangle) && platforms[i].texture != GameState.sign_texture)
                 {
                     intersectedRight = true;
                     if (platforms[i].isDeadly)
@@ -183,7 +189,7 @@ namespace _2DPlatformer
                         Die();
                     }
                 }
-                if (rectangleLeft.Intersects(platforms[i].rectangle))
+                if (rectangleLeft.Intersects(platforms[i].rectangle) && platforms[i].texture != GameState.sign_texture)
                 {
                     intersectedLeft = true;
                     if (platforms[i].isDeadly)

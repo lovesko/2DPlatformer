@@ -43,15 +43,12 @@ namespace _2DPlatformer.States
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                _game.ChangeState(new GameState(_game, _graphics, _content));
-            }
             
             button_play.Update(); 
             if (button_play.clicked) //om klickar play --> spelet startar
             {
                 _game.ChangeState(new GameState(_game, _graphics, _content));
+                _game.IsMouseVisible = false;
             }
 
             button_exit.Update();

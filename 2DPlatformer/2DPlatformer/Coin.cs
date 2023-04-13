@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _2DPlatformer.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,17 +15,25 @@ namespace _2DPlatformer
         public Texture2D texture;
         public Vector2 position;
         public Rectangle rectangle;
+        Animation animation;
 
         public Coin(Texture2D newTexture, Vector2 newPosition)
         {
             texture = newTexture;
             position = newPosition;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);   
+            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            animation = new Animation(texture, 6, 0.15f);
         }
+
+        public void Update()
+        {
+            animation.Update();
+        }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            animation.Draw(position, spriteBatch);
         }
 
 

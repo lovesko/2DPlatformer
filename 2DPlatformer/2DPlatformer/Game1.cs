@@ -17,6 +17,7 @@ namespace _2DPlatformer
         public static int screenHeight = 720;
         private State _currentState;
         private State _nextState;
+        public static float TotalSeconds;
 
         public Game1()
         {
@@ -40,6 +41,7 @@ namespace _2DPlatformer
 
         protected override void Update(GameTime gameTime)
         {
+            TotalSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (_nextState != null)
             {
                 _currentState = _nextState;
@@ -52,14 +54,6 @@ namespace _2DPlatformer
         }
         public void ChangeState(State state)
         {
-            if (IsMouseVisible)
-            {
-                IsMouseVisible=false;
-            }
-            else
-            {
-                IsMouseVisible=true;
-            }
             _nextState = state;
         }
         public void Quit()

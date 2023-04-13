@@ -93,3 +93,7 @@ C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\mushroom.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\spike.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Fonts\Font_larger.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\pointer2.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin2.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin3.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin4.xnb
