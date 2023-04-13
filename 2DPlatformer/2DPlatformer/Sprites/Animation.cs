@@ -13,14 +13,11 @@ namespace _2DPlatformer.Sprites
     {
         Texture2D texture;
         List<Rectangle> sourceRectangles = new();
-        public static float TotalSeconds { get; set; }
-
         int frames;
         int frame;
         float frameTime;
         float frameTimeLeft;
         bool active = true;
-
         public Animation(Texture2D newTexture, int framesX, float newFrameTime)
         {
             texture = newTexture;
@@ -53,7 +50,6 @@ namespace _2DPlatformer.Sprites
             frame = 0;
             frameTimeLeft = frameTime;
         }
-
 
         public void Update()
         {

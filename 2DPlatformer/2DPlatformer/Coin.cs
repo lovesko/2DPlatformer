@@ -30,7 +30,6 @@ namespace _2DPlatformer
             animation.Update();
         }
 
-
         public void Draw(SpriteBatch spriteBatch)
         {
             animation.Draw(position, spriteBatch);

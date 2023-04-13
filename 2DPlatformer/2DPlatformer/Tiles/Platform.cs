@@ -14,15 +14,16 @@ namespace _2DPlatformer
         public Texture2D texture;
         public Vector2 position;
         public Rectangle rectangle;
-        public bool isDeadly, isBreakable;
+        public bool isDeadly, isBreakable, isBouncy;
 
-        public Platform(Texture2D newTexture, Vector2 newPosition, bool deadly, bool breakable)
+        public Platform(Texture2D newTexture, Vector2 newPosition, bool deadly, bool breakable, bool bouncy)
         {
             texture = newTexture;
             position = newPosition;
             rectangle = new Rectangle((int)position.X, (int)position.Y + 1, (int)texture.Width, (int)texture.Height);
             isDeadly = deadly;
             isBreakable = breakable;
+            isBouncy = bouncy;
         }
 
         public void Draw(SpriteBatch spriteBatch)

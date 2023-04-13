@@ -157,6 +157,12 @@ namespace _2DPlatformer
                     {
                         Die();
                     }
+                    else if (platforms[i].isBouncy)
+                    {
+                        hasJumped = true;
+                        velocity.Y = -18f;
+                        isGrounded = false;
+                    }
                     else
                     {
                         intersected = true;
@@ -215,13 +221,15 @@ namespace _2DPlatformer
 
             #region kollisioner med fiender
 
-            for (int i = enemies.Count - 1; i >= 0; i--)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                if (rectangleFeet.Intersects(enemies[i].rectangleHead))
+                if (rectangleFeet.Intersects(enemies[i].rectangleHead)) //goombastomp
                 {
+                    //studsar på fienden
                     hasJumped = true;
                     velocity.Y = -7f;
                     isGrounded = false;
+
                     score += 100;
                     GameState.score_str = score.ToString();
 

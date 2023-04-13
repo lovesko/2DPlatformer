@@ -15,6 +15,7 @@ namespace _2DPlatformer
     {
         List<Platform> platforms;
         Texture2D texture;
+        SpriteEffects s = SpriteEffects.FlipHorizontally;
         public Vector2 position;
         public Vector2 velocity;
         public Rectangle rectangle, turningRectangle, rectangleHead;
@@ -75,7 +76,15 @@ namespace _2DPlatformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            if (movingRight)
+            {
+                spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, 1, s, 0);
+            }
+            else
+            {
+                spriteBatch.Draw(texture, position, Color.White);
+            }
+            
         }
     }
 }
