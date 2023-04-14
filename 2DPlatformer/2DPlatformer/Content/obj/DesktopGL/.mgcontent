@@ -7,6 +7,11 @@
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Controls/button.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Fonts/Font.spritefont</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Fonts/Font_larger.spritefont</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Music/music.mp3</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/coin01.wav</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/death1.wav</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/death2.wav</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/jump01.wav</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/coin.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/coin1.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/coin2.png</File>
@@ -17,6 +22,7 @@
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/ground14.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/ground4.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/ground6.png</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/jump.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/mushroom.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/player.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/pointer2.png</File>
@@ -28,6 +34,12 @@
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/walk2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

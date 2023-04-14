@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace _2DPlatformer.States
             font_larger = _content.Load<SpriteFont>("Fonts/font_larger");
             button_texture = _content.Load<Texture2D>("Controls/button");
             button = new Button(button_texture, new Vector2(Game1.screenWidth / 2 - button_texture.Width / 2, Game1.screenHeight - 100), font, "Menu");
+            MediaPlayer.Stop();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _2DPlatformer.States;
 using _2DPlatformer.Sprites;
+using Microsoft.Xna.Framework.Audio;
 
 namespace _2DPlatformer
 {
@@ -18,12 +19,15 @@ namespace _2DPlatformer
     {
         List<Platform> platforms;
         List<Enemy> enemies;
-        Texture2D texture, walking_texture;
+        Texture2D texture, walking_texture, jumping_texture;
+        SoundEffect jump_sound, enemy_death_sound, coin_sound, death_sound;
+
         public Vector2 position;
         public Vector2 velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
         int score = 0;
+        float speed = 4f;
         public bool win = false;
         Animation walk_animation;
 
@@ -32,16 +36,22 @@ namespace _2DPlatformer
 
         SpriteEffects s = SpriteEffects.FlipHorizontally;
 
-        public Player(Texture2D newTexture, Texture2D newWalkingTexture, Vector2 newPosition, List<Platform> newPlatforms, List<Enemy> newEnemies)
+        public Player(Texture2D newTexture, Texture2D newWalkingTexture, Texture2D newJumpingTexture, Vector2 newPosition, List<Platform> newPlatforms, List<Enemy> newEnemies)
         {
             texture = newTexture;
             walking_texture = newWalkingTexture;
+            jumping_texture = newJumpingTexture;
             position = newPosition;
             hasJumped = true;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             platforms = newPlatforms;
             enemies = newEnemies;
             walk_animation = new Animation(walking_texture, 10, 0.1f);
+
+            jump_sound = GameState.jump_sound;
+            enemy_death_sound = GameState.enemy_death_sound;
+            coin_sound = GameState.coin_sound;
+            death_sound = GameState.player_death_sound;
         }
 
         public void Die()
@@ -50,7 +60,7 @@ namespace _2DPlatformer
             position.X = 0;
             score = 0;
             GameState.score_str = score.ToString();
-
+            death_sound.Play(0.3f, 0, 0);
             for (int i = 0; i < enemies.Count;i++)
             {
                 enemies.RemoveAt(i);
@@ -65,18 +75,14 @@ namespace _2DPlatformer
                 platforms.RemoveAt(i);
             }
             GameState.platforms = platforms;
-
-            
             Map.Generate(platforms);
-            
         }
 
         public void Update(GameTime gameTime)
         {
-            position += velocity;
-            //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|||| Score: " + score);
-
             walk_animation.Update();
+            position += velocity;
+            //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Score: " + score);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -88,30 +94,25 @@ namespace _2DPlatformer
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false || 
                 Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
             {
-                velocity.X = 4f;
+                velocity.X = speed;
                 s = SpriteEffects.None;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false ||
                      Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false)
             {
-                velocity.X = -4f;
+                velocity.X = -speed;
                 s = SpriteEffects.FlipHorizontally;
             }
             else
             {
                 velocity.X = 0;
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                
-            }
-
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
             {
                 hasJumped = true;
                 velocity.Y = -10f;
                 isGrounded = false;
+                //jump_sound.Play(0.05f, 0, 0);
             }
 
             //Varierande hopp beroende på hur länge man trycker Space
@@ -235,7 +236,7 @@ namespace _2DPlatformer
                     hasJumped = true;
                     velocity.Y = -7f;
                     isGrounded = false;
-
+                    enemy_death_sound.Play(0.6f, 0, 0);
                     score += 100;
                     GameState.score_str = score.ToString();
 
@@ -258,6 +259,7 @@ namespace _2DPlatformer
                 {
                     GameState.coins.RemoveAt(i);
                     score += 50;
+                    coin_sound.Play(0.1f, 0, 0);
                     GameState.score_str = score.ToString();
                 }
             }
@@ -268,15 +270,19 @@ namespace _2DPlatformer
         public void Draw(SpriteBatch spriteBatch)
         {
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false ||
-                Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false && !hasJumped ||
+                Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false && !hasJumped)
             {
                 walk_animation.Draw(position, spriteBatch, SpriteEffects.None);
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false ||
-                     Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false)
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false && !hasJumped ||
+                     Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false  && !hasJumped)
             {
                 walk_animation.Draw(position, spriteBatch, SpriteEffects.FlipHorizontally);
+            }
+            else if (hasJumped)
+            {
+                spriteBatch.Draw(jumping_texture, position, null, Color.White, 0, Vector2.Zero, 1, s, 0);
             }
             else
             {

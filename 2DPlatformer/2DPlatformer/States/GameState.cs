@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,12 @@ namespace _2DPlatformer.States
         public static List<Enemy> enemies = new List<Enemy>();
         public static List<Coin> coins = new List<Coin>();
 
-        public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture, sign_texture, spring_texture, player_texture, player_walking_texture;
+        public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture, sign_texture, spring_texture, 
+                                player_texture, player_walking_texture, player_jumping_texture;
+
+        public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound;
+
+        Song music;
 
         SpriteFont score_font;
         public static string score_str = "0";
@@ -36,6 +43,7 @@ namespace _2DPlatformer.States
             
 
             player_walking_texture = _content.Load<Texture2D>("Sprites/walk2");
+            player_jumping_texture = _content.Load<Texture2D>("Sprites/jump");
             player_texture = _content.Load<Texture2D>("Sprites/player");
             dirt_texture = _content.Load<Texture2D>("Sprites/ground6");
             grass2_texture = _content.Load<Texture2D>("Sprites/ground4");
@@ -46,8 +54,19 @@ namespace _2DPlatformer.States
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
             spring_texture = _content.Load<Texture2D>("Sprites/spring2");
 
+            jump_sound = _content.Load<SoundEffect>("Sound Effects/jump01");
+            player_death_sound = _content.Load<SoundEffect>("Sound Effects/death2");
+            enemy_death_sound = _content.Load<SoundEffect>("Sound Effects/death1");
+            coin_sound = _content.Load<SoundEffect>("Sound Effects/coin01");
+
+            music = _content.Load<Song>("Music/music");
+            
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Play(music);
+
             map = new Map();
-            player = new Player(player_texture, player_walking_texture, new Vector2(38, 157), platforms, enemies);
+            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(38, 157), platforms, enemies);
             camera = new Camera();
 
             score_font = _content.Load<SpriteFont>("Fonts/font");

@@ -22,7 +22,7 @@ namespace _2DPlatformer
             texture = newTexture;
             position = newPosition;
             rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            animation = new Animation(texture, 6, 0.15f);
+            animation = new Animation(texture, 6, 0.1f);
         }
 
         public void Update()
