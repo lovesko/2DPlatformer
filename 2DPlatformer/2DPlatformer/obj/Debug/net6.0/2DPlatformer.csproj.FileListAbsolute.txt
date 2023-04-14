@@ -100,3 +100,5 @@ C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\rock.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\slime-monster.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\player.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\walk.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\walk2.xnb

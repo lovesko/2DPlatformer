@@ -24,8 +24,12 @@
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/slime-monster.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/spike.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/spring2.png</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/walk.png</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/walk2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

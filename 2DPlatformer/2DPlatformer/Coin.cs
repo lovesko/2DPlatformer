@@ -32,7 +32,7 @@ namespace _2DPlatformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(position, spriteBatch);
+            animation.Draw(position, spriteBatch, SpriteEffects.None);
         }
 
 

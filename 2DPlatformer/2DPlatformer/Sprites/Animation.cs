@@ -64,9 +64,9 @@ namespace _2DPlatformer.Sprites
             }
         }
 
-        public void Draw(Vector2 position, SpriteBatch spriteBatch)
+        public void Draw(Vector2 position, SpriteBatch spriteBatch, SpriteEffects s)
         {
-            spriteBatch.Draw(texture, position, sourceRectangles[frame], Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, position, sourceRectangles[frame], Color.White, 0, Vector2.Zero, Vector2.One, s, 1);
         }
 
     }

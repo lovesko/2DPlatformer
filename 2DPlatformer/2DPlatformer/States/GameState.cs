@@ -16,7 +16,7 @@ namespace _2DPlatformer.States
         public static List<Enemy> enemies = new List<Enemy>();
         public static List<Coin> coins = new List<Coin>();
 
-        public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture, sign_texture, spring_texture;
+        public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture, sign_texture, spring_texture, player_texture, player_walking_texture;
 
         SpriteFont score_font;
         public static string score_str = "0";
@@ -33,10 +33,10 @@ namespace _2DPlatformer.States
         }
         public override void LoadContent()
         {
-            map = new Map();
-            player = new Player(_content.Load<Texture2D>("Sprites/player"), new Vector2(38, 157), platforms, enemies);
-            camera = new Camera();
+            
 
+            player_walking_texture = _content.Load<Texture2D>("Sprites/walk2");
+            player_texture = _content.Load<Texture2D>("Sprites/player");
             dirt_texture = _content.Load<Texture2D>("Sprites/ground6");
             grass2_texture = _content.Load<Texture2D>("Sprites/ground4");
             grass_texture = _content.Load<Texture2D>("Sprites/ground11");
@@ -46,9 +46,14 @@ namespace _2DPlatformer.States
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
             spring_texture = _content.Load<Texture2D>("Sprites/spring2");
 
+            map = new Map();
+            player = new Player(player_texture, player_walking_texture, new Vector2(38, 157), platforms, enemies);
+            camera = new Camera();
+
             score_font = _content.Load<SpriteFont>("Fonts/font");
             score_pos = new Vector2(player.position.X + _graphics.Viewport.Width, 0);
 
+            
             Map.Generate(platforms);
         }
         public override void Update(GameTime gameTime)

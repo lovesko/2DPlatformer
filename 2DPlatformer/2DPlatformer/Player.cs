@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _2DPlatformer.States;
+using _2DPlatformer.Sprites;
 
 namespace _2DPlatformer
 {
@@ -17,27 +18,30 @@ namespace _2DPlatformer
     {
         List<Platform> platforms;
         List<Enemy> enemies;
-        Texture2D texture;
+        Texture2D texture, walking_texture;
         public Vector2 position;
         public Vector2 velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
         int score = 0;
         public bool win = false;
+        Animation walk_animation;
 
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
 
         SpriteEffects s = SpriteEffects.FlipHorizontally;
 
-        public Player(Texture2D newTexture, Vector2 newPosition, List<Platform> newPlatforms, List<Enemy> newEnemies)
+        public Player(Texture2D newTexture, Texture2D newWalkingTexture, Vector2 newPosition, List<Platform> newPlatforms, List<Enemy> newEnemies)
         {
             texture = newTexture;
+            walking_texture = newWalkingTexture;
             position = newPosition;
             hasJumped = true;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             platforms = newPlatforms;
             enemies = newEnemies;
+            walk_animation = new Animation(walking_texture, 10, 0.1f);
         }
 
         public void Die()
@@ -71,6 +75,8 @@ namespace _2DPlatformer
         {
             position += velocity;
             //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|||| Score: " + score);
+
+            walk_animation.Update();
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -261,7 +267,22 @@ namespace _2DPlatformer
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, 1, s, 0);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false ||
+                Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
+            {
+                walk_animation.Draw(position, spriteBatch, SpriteEffects.None);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false ||
+                     Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false)
+            {
+                walk_animation.Draw(position, spriteBatch, SpriteEffects.FlipHorizontally);
+            }
+            else
+            {
+                spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, 1, s, 0);
+            }
+            
         }
 
     }
