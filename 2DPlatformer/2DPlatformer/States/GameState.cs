@@ -21,7 +21,7 @@ namespace _2DPlatformer.States
         public static List<MovingPlatform> movingPlatforms = new List<MovingPlatform>();
 
         public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture, sign_texture, spring_texture, 
-                                player_texture, player_walking_texture, player_jumping_texture;
+                                player_texture, player_walking_texture, player_jumping_texture, enemy_walking_texture;
 
         public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound;
 
@@ -53,8 +53,10 @@ namespace _2DPlatformer.States
             spike_texture = _content.Load<Texture2D>("Sprites/spike");
             coin_texture = _content.Load<Texture2D>("Sprites/coin4");
             enemy_texture = _content.Load<Texture2D>("Sprites/slime-monster");
+            enemy_walking_texture = _content.Load<Texture2D>("Sprites/santa-walk");
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
             spring_texture = _content.Load<Texture2D>("Sprites/spring2");
+
 
             jump_sound = _content.Load<SoundEffect>("Sound Effects/jump01");
             player_death_sound = _content.Load<SoundEffect>("Sound Effects/death2");
@@ -67,24 +69,26 @@ namespace _2DPlatformer.States
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(music);
 
+
             map = new Map();
-            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(38, 157), platforms, enemies);
+            Map.Generate();
+            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(46, 489));
             camera = new Camera();
 
             score_font = _content.Load<SpriteFont>("Fonts/font");
-            score_pos = new Vector2(player.position.X + _graphics.Viewport.Width, 0);
+            score_pos = new Vector2(600, 489);
 
             
-            Map.Generate(platforms);
+            
         }
         public override void Update(GameTime gameTime)
         {
             player.Update(gameTime);
+            camera.Follow(player);
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update(gameTime);
             }
-            camera.Follow(player);
             foreach (Coin coin in coins)
             {
                 coin.Update();
@@ -95,11 +99,11 @@ namespace _2DPlatformer.States
             }
             if (player.position.X < 625) //när kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position. Kameran börjar röra sig ~625.
             {
-                score_pos = new Vector2(_graphics.Viewport.Width - 100, -200);
+                score_pos = new Vector2(_graphics.Viewport.Width - 100, 100);
             }
             else
             {
-                score_pos = new Vector2(player.position.X + (_graphics.Viewport.Width / 2) - 85, -200);
+                score_pos = new Vector2(player.position.X + (_graphics.Viewport.Width / 2) - 85, 100);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {

@@ -20,8 +20,8 @@ namespace _2DPlatformer
             var position = Matrix.CreateTranslation(
                 MathHelper.Clamp(-target.position.X - (target.rectangle.Width / 2), -538745873475, -650),
                 //-target.position.Y - (target.rectangle.Height / 2),
-                0,
-                0);
+                MathHelper.Clamp(-target.position.Y - (target.rectangle.Height / 2), -200, -3475738),
+                0) ;
             
             var offset = Matrix.CreateTranslation(
                     Game1.screenWidth / 2,

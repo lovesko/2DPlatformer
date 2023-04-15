@@ -54,7 +54,7 @@ namespace _2DPlatformer.States
             button_exit.Update();
             if (button_exit.clicked)
             {
-                _game.Quit();  //om klickar exit --> applikation avslutas
+                _game.Quit();  //om klickar exit --> spelet avslutas
             }
         }
         public override void PostUpdate(GameTime gameTime)

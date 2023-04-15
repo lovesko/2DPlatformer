@@ -38,8 +38,6 @@ namespace _2DPlatformer.Tiles
                     start = -start;
                 }
             }
-
-
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -18,8 +18,6 @@ namespace _2DPlatformer
 
     public class Player
     {
-        List<Platform> platforms;
-        List<Enemy> enemies;
         Texture2D texture, walking_texture, jumping_texture;
         SoundEffect jump_sound, enemy_death_sound, coin_sound, death_sound;
 
@@ -30,6 +28,7 @@ namespace _2DPlatformer
         int score = 0;
         float speed = 4f;
         public bool win = false;
+        bool justJumped = false;
         Animation walk_animation;
 
         KeyboardState currentKeyboardState;
@@ -37,7 +36,7 @@ namespace _2DPlatformer
 
         SpriteEffects s = SpriteEffects.FlipHorizontally;
 
-        public Player(Texture2D newTexture, Texture2D newWalkingTexture, Texture2D newJumpingTexture, Vector2 newPosition, List<Platform> newPlatforms, List<Enemy> newEnemies)
+        public Player(Texture2D newTexture, Texture2D newWalkingTexture, Texture2D newJumpingTexture, Vector2 newPosition)
         {
             texture = newTexture;
             walking_texture = newWalkingTexture;
@@ -45,8 +44,6 @@ namespace _2DPlatformer
             position = newPosition;
             hasJumped = true;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
-            platforms = newPlatforms;
-            enemies = newEnemies;
             walk_animation = new Animation(walking_texture, 10, 0.1f);
 
             jump_sound = GameState.jump_sound;
@@ -62,33 +59,59 @@ namespace _2DPlatformer
             score = 0;
             GameState.score_str = score.ToString();
             death_sound.Play(0.1f, 0, 0);
-            for (int i = 0; i < enemies.Count;i++)
+
+            for (int i = 0; i < GameState.enemies.Count;i++)
             {
-                enemies.RemoveAt(i);
+                GameState.enemies.RemoveAt(i);
             }
-            GameState.enemies = enemies;
+
             for (int i = 0; i < GameState.coins.Count; i++)
             {
                 GameState.coins.RemoveAt(i);
             }
-            for (int i = 0; i < platforms.Count; i++)
+
+            for (int i = 0; i < GameState.platforms.Count; i++)
             {
-                platforms.RemoveAt(i);
+                GameState.platforms.RemoveAt(i);
             }
+
             for (int i = 0; i < GameState.movingPlatforms.Count; i++)
             {
                 GameState.movingPlatforms.RemoveAt(i);
             }
+            Map.Generate();
+        }
 
-            GameState.platforms = platforms;
-            Map.Generate(platforms);
+        public void Win()
+        {
+            score = 0;
+            GameState.score_str = score.ToString();
+            for (int i = 0; i < GameState.enemies.Count; i++)
+            {
+                GameState.enemies.RemoveAt(i);
+            }
+
+            for (int i = 0; i < GameState.coins.Count; i++)
+            {
+                GameState.coins.RemoveAt(i);
+            }
+
+            for (int i = 0; i < GameState.platforms.Count; i++)
+            {
+                GameState.platforms.RemoveAt(i);
+            }
+
+            for (int i = 0; i < GameState.movingPlatforms.Count; i++)
+            {
+                GameState.movingPlatforms.RemoveAt(i);
+            }
         }
 
         public void Update(GameTime gameTime)
         {
             walk_animation.Update();
             position += velocity;
-            //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Score: " + score);
+            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -97,6 +120,7 @@ namespace _2DPlatformer
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);
 
             #region input
+            
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false || 
                 Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
             {
@@ -113,13 +137,19 @@ namespace _2DPlatformer
             {
                 velocity.X = 0;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false && justJumped == false)
             {
                 hasJumped = true;
                 velocity.Y = -10f;
                 isGrounded = false;
-                //jump_sound.Play(0.05f, 0, 0);
+                justJumped = true;
             }
+            else if ((Keyboard.GetState().IsKeyUp(Keys.Space)))
+            {
+                justJumped = false;
+            }
+
 
             //Varierande hopp beroende på hur länge man trycker Space
             currentKeyboardState = Keyboard.GetState();
@@ -134,122 +164,107 @@ namespace _2DPlatformer
             #region gravity
             if (hasJumped)
             {
-                velocity.Y += 0.50f;
+                velocity.Y += 0.5f;
+                isGrounded = false;
             }
 
             if (isGrounded == false)
             {
                 hasJumped = true;
             }
-            if (isGrounded)
+            if (isGrounded && velocity.Y >= 0)
             {
                 velocity.Y = 0f;
-            }
-            if (!hasJumped)
-            {
-                velocity.Y = 0f;
+                
             }
             #endregion
 
             #region kollisioner med plattformar
 
-            bool intersected = false;
+            bool intersectedFeet = false;
             bool intersectedLeft = false;
             bool intersectedRight = false;
 
-            for (int i = 0; i < platforms.Count; i++)
+            for (int i = 0; i < GameState.platforms.Count; i++)
             {
-                if (rectangle.Intersects(platforms[i].rectangle) && platforms[i].texture == GameState.sign_texture) // om spelaren rör en skylt ska han vinna
+                if (rectangle.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture == GameState.sign_texture) // om spelaren rör en skylt ska han vinna
                 {
                     win = true;
-                    Die();
+                    Win();
                 }
-
-                if (rectangleFeet.Intersects(platforms[i].rectangle))
+                if (rectangleFeet.Intersects(GameState.platforms[i].rectangle))
                 {
-                    if (platforms[i].isDeadly)
+                    if (GameState.platforms[i].isDeadly)
                     {
                         Die();
                     }
-                    else if (platforms[i].isBouncy)
+                    else if (GameState.platforms[i].isBouncy)
                     {
                         hasJumped = true;
                         velocity.Y = -18f;
                         isGrounded = false;
                         jump_sound.Play(0.1f, 0, 0);
                     }
-                    else
+                    else //normal plattform
                     {
-                        intersected = true;
+                        intersectedFeet = true;
                         hasJumped = false;
                         isGrounded = true;
-                        position.Y = platforms[i].rectangle.Top - texture.Height;
+                        position.Y = GameState.platforms[i].rectangle.Top - texture.Height;
                     }
                 }
 
-                if (rectangleHead.Intersects(platforms[i].rectangle))
+                if (rectangleHead.Intersects(GameState.platforms[i].rectangle))
                 {
                     velocity.Y = 0f;
                     position.Y += 2;
-                    if (platforms[i].isDeadly)
+                    if (GameState.platforms[i].isDeadly)
                     {
                         Die();
                     }
-                    if (platforms[i].isBreakable)
+                    if (GameState.platforms[i].isBreakable)
                     {
-                        platforms.Remove(platforms[i]);
-                        GameState.platforms = platforms;
+                        GameState.platforms.RemoveAt(i);
                     }
                 }
 
-                if (rectangleRight.Intersects(platforms[i].rectangle) && platforms[i].texture != GameState.sign_texture)
+                if (rectangleRight.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture != GameState.sign_texture)
                 {
                     intersectedRight = true;
-                    if (platforms[i].isDeadly)
+                    if (GameState.platforms[i].isDeadly)
                     {
                         Die();
                     }
                 }
-                if (rectangleLeft.Intersects(platforms[i].rectangle) && platforms[i].texture != GameState.sign_texture)
+                if (rectangleLeft.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture != GameState.sign_texture)
                 {
                     intersectedLeft = true;
-                    if (platforms[i].isDeadly)
+                    if (GameState.platforms[i].isDeadly)
                     {
                         Die();
                     }
                 }
-
                 if (position.X <= texture.Width / 2 -10)
                 {
                     intersectedLeft = true;
                 }
-                if (position.Y >= 720)
-                {
-                    Die();
-                }
-
-                
-
             }
 
             foreach (MovingPlatform movingPlatform in GameState.movingPlatforms)
             {
                 if (rectangleFeet.Intersects(movingPlatform.rectangle))
                 {
-                    intersected = true;
+                    intersectedFeet = true;
                     hasJumped = false;
                     isGrounded = true;
                     position.Y = movingPlatform.rectangle.Top - texture.Height;
                     velocity.X += movingPlatform.velocity;
                 }
-
                 if (rectangleHead.Intersects(movingPlatform.rectangle))
                 {
                     velocity.Y = 0f;
                     position.Y += 2;
                 }
-
-
                 if (rectangleRight.Intersects(movingPlatform.rectangle))
                 {
                     intersectedRight = true;
@@ -272,16 +287,16 @@ namespace _2DPlatformer
                 }
             }
 
-            isGrounded = intersected;
+            isGrounded = intersectedFeet;
             blockedLeft = intersectedLeft;
             blockedRight = intersectedRight;
             #endregion
 
             #region kollisioner med fiender
 
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < GameState.enemies.Count; i++)
             {
-                if (rectangleFeet.Intersects(enemies[i].rectangleHead)) //goombastomp
+                if (rectangleFeet.Intersects(GameState.enemies[i].rectangleHead)) //goombastomp
                 {
                     //studsar på fienden
                     hasJumped = true;
@@ -291,10 +306,9 @@ namespace _2DPlatformer
                     score += 100;
                     GameState.score_str = score.ToString();
 
-                    enemies.RemoveAt(i);
-                    GameState.enemies = enemies;
+                    GameState.enemies.RemoveAt(i);
                 }
-                else if (rectangle.Intersects(enemies[i].rectangle))
+                else if (rectangle.Intersects(GameState.enemies[i].rectangle))
                 {
                     Die();
                 }
