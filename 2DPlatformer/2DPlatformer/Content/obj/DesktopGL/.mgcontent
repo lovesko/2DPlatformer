@@ -7,6 +7,7 @@
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Controls/button.png</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Fonts/Font.spritefont</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Fonts/Font_larger.spritefont</File>
+    <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Music/game-music.mp3</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Music/music.mp3</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/coin01.wav</File>
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/death1.wav</File>
@@ -34,6 +35,7 @@
     <File>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/walk2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

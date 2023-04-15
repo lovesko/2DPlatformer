@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using _2DPlatformer.Tiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,7 @@ namespace _2DPlatformer.States
         public static List<Platform> platforms = new List<Platform>();
         public static List<Enemy> enemies = new List<Enemy>();
         public static List<Coin> coins = new List<Coin>();
+        public static List<MovingPlatform> movingPlatforms = new List<MovingPlatform>();
 
         public static Texture2D grass2_texture, enemy_texture, dirt_texture, coin_texture, grass_texture, spike_texture, sign_texture, spring_texture, 
                                 player_texture, player_walking_texture, player_jumping_texture;
@@ -59,7 +61,7 @@ namespace _2DPlatformer.States
             enemy_death_sound = _content.Load<SoundEffect>("Sound Effects/death1");
             coin_sound = _content.Load<SoundEffect>("Sound Effects/coin01");
 
-            music = _content.Load<Song>("Music/music");
+            music = _content.Load<Song>("Music/game-music");
             
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.1f;
@@ -86,6 +88,10 @@ namespace _2DPlatformer.States
             foreach (Coin coin in coins)
             {
                 coin.Update();
+            }
+            foreach (MovingPlatform platform in movingPlatforms)
+            {
+                platform.Update();
             }
             if (player.position.X < 625) //när kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position. Kameran börjar röra sig ~625.
             {
@@ -124,6 +130,10 @@ namespace _2DPlatformer.States
             foreach (Coin coin in coins)
             {
                 coin.Draw(spriteBatch);
+            }
+            foreach (MovingPlatform platform in movingPlatforms)
+            {
+                platform.Draw(spriteBatch);
             }
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
             spriteBatch.End();

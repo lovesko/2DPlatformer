@@ -109,3 +109,5 @@ C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\music.ogg
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\music.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\death2.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\game-music.ogg
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\game-music.xnb

@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using _2DPlatformer.States;
 using _2DPlatformer.Sprites;
 using Microsoft.Xna.Framework.Audio;
+using _2DPlatformer.Tiles;
 
 namespace _2DPlatformer
 {
@@ -60,7 +61,7 @@ namespace _2DPlatformer
             position.X = 0;
             score = 0;
             GameState.score_str = score.ToString();
-            death_sound.Play(0.3f, 0, 0);
+            death_sound.Play(0.1f, 0, 0);
             for (int i = 0; i < enemies.Count;i++)
             {
                 enemies.RemoveAt(i);
@@ -74,6 +75,11 @@ namespace _2DPlatformer
             {
                 platforms.RemoveAt(i);
             }
+            for (int i = 0; i < GameState.movingPlatforms.Count; i++)
+            {
+                GameState.movingPlatforms.RemoveAt(i);
+            }
+
             GameState.platforms = platforms;
             Map.Generate(platforms);
         }
@@ -156,6 +162,7 @@ namespace _2DPlatformer
                 if (rectangle.Intersects(platforms[i].rectangle) && platforms[i].texture == GameState.sign_texture) // om spelaren rör en skylt ska han vinna
                 {
                     win = true;
+                    Die();
                 }
 
                 if (rectangleFeet.Intersects(platforms[i].rectangle))
@@ -169,6 +176,7 @@ namespace _2DPlatformer
                         hasJumped = true;
                         velocity.Y = -18f;
                         isGrounded = false;
+                        jump_sound.Play(0.1f, 0, 0);
                     }
                     else
                     {
@@ -218,6 +226,49 @@ namespace _2DPlatformer
                 if (position.Y >= 720)
                 {
                     Die();
+                }
+
+                
+
+            }
+
+            foreach (MovingPlatform movingPlatform in GameState.movingPlatforms)
+            {
+                if (rectangleFeet.Intersects(movingPlatform.rectangle))
+                {
+                    intersected = true;
+                    hasJumped = false;
+                    isGrounded = true;
+                    position.Y = movingPlatform.rectangle.Top - texture.Height;
+                    velocity.X += movingPlatform.velocity;
+                }
+
+                if (rectangleHead.Intersects(movingPlatform.rectangle))
+                {
+                    velocity.Y = 0f;
+                    position.Y += 2;
+                }
+
+
+                if (rectangleRight.Intersects(movingPlatform.rectangle))
+                {
+                    intersectedRight = true;
+                    if (movingPlatform.velocity < 0)
+                    {
+                        movingPlatform.velocity = movingPlatform.stop;
+                    }
+                }
+                else if (rectangleLeft.Intersects(movingPlatform.rectangle))
+                {
+                    intersectedLeft = true;
+                    if (movingPlatform.velocity > 0)
+                    {
+                        movingPlatform.velocity = movingPlatform.stop;
+                    }
+                }
+                else 
+                {
+                    movingPlatform.velocity = movingPlatform.start;
                 }
             }
 
