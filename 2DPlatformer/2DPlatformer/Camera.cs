@@ -18,8 +18,8 @@ namespace _2DPlatformer
         public void Follow(Player target)
         {
             var position = Matrix.CreateTranslation(
-                MathHelper.Clamp(-target.position.X - (target.rectangle.Width / 2), -538745873475, -650),
-                //-target.position.Y - (target.rectangle.Height / 2),
+                MathHelper.Clamp(-target.position.X - (target.rectangle.Width / 2), -3420, -650),
+                //-target.position.Y - (target.rectangle.Height / 2), -- centrerad kamera y-axel
                 MathHelper.Clamp(-target.position.Y - (target.rectangle.Height / 2), -200, -3475738),
                 0) ;
             

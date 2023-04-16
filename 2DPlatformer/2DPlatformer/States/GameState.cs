@@ -72,7 +72,10 @@ namespace _2DPlatformer.States
 
             map = new Map();
             Map.Generate();
+
             player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(46, 489));
+
+            
             camera = new Camera();
 
             score_font = _content.Load<SpriteFont>("Fonts/font");

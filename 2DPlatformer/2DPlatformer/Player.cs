@@ -64,7 +64,6 @@ namespace _2DPlatformer
             GameState.coins.Clear();
             GameState.platforms.Clear();
             GameState.movingPlatforms.Clear();
-
             Map.Generate();
         }
 
@@ -76,6 +75,7 @@ namespace _2DPlatformer
             GameState.coins.Clear();
             GameState.platforms.Clear();
             GameState.movingPlatforms.Clear();
+            Map.Generate();
         }
 
         public void Update(GameTime gameTime)
@@ -151,6 +151,8 @@ namespace _2DPlatformer
             #endregion
 
             #region kollisioner med plattformar
+
+
 
             bool intersectedFeet = false;
             bool intersectedLeft = false;
