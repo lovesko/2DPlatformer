@@ -25,19 +25,19 @@
 /processorParam:TextureFormat=Color
 /build:Controls/button.png
 
-#begin Fonts/Font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Fonts/Font.spritefont
-
 #begin Fonts/Font_larger.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Font_larger.spritefont
+
+#begin Fonts/Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Font.spritefont
 
 #begin Music/game-music.mp3
 /importer:Mp3Importer
@@ -147,6 +147,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/enemy.png
 
+#begin Sprites/ground1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/ground1.png
+
+#begin Sprites/ground10.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/ground10.png
+
 #begin Sprites/ground11.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -158,6 +182,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/ground11.png
+
+#begin Sprites/ground14.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/ground14.png
 
 #begin Sprites/ground14.png
 /importer:TextureImporter

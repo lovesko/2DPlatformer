@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace _2DPlatformer.States
 
         public override void Update(GameTime gameTime)
         {
+            Debug.WriteLine(GameState.player.level);
             button.Update();
             if (button.clicked)
             {

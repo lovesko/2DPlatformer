@@ -50,10 +50,6 @@ C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug\net6.0\ref\2DPlatformer.dll
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug\net6.0\2DPlatformer.pdb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\obj\Debug\net6.0\2DPlatformer.genruntimeconfig.cache
-C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\big-grass.xnb
-C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\character.xnb
-C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\grass-floor.xnb
-C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\grass.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\2DPlatformer.exe
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\2DPlatformer.deps.json
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\2DPlatformer.runtimeconfig.json
@@ -113,3 +109,39 @@ C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\game-music.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk1.xnb
 C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\santa-walk.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\brick.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Controls\button.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Fonts\Font.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Fonts\Font_larger.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\game-music.ogg
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\game-music.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\music.ogg
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\music.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\coin01.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\death1.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\death2.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\jump01.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin1.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin2.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin3.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\coin4.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\enemy.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground11.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground14.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground4.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground6.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\jump.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\mushroom.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\player.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\pointer2.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\rock.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\santa-walk.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\slime-monster.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\spike.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\spring2.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\walk.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\walk2.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk1.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground1.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground10.xnb

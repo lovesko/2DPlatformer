@@ -25,7 +25,8 @@ namespace _2DPlatformer
         public Vector2 velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
-        int score = 0;
+        public int score = 0;
+        public int level = 1;
         float speed = 4f;
         public bool win = false;
         bool justJumped = false;
@@ -65,24 +66,12 @@ namespace _2DPlatformer
             GameState.platforms.Clear();
             GameState.movingPlatforms.Clear();
             Map.Generate();
-        }
-
-        public void Win()
-        {
-            score = 0;
-            GameState.score_str = score.ToString();
-            GameState.enemies.Clear();
-            GameState.coins.Clear();
-            GameState.platforms.Clear();
-            GameState.movingPlatforms.Clear();
-            Map.Generate();
-        }
-
+        } 
         public void Update(GameTime gameTime)
         {
             walk_animation.Update();
             position += velocity;
-            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
+            //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Level: " + level);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -152,8 +141,6 @@ namespace _2DPlatformer
 
             #region kollisioner med plattformar
 
-
-
             bool intersectedFeet = false;
             bool intersectedLeft = false;
             bool intersectedRight = false;
@@ -163,7 +150,7 @@ namespace _2DPlatformer
                 if (rectangle.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture == GameState.sign_texture) // om spelaren rör en skylt ska han vinna
                 {
                     win = true;
-                    Win();
+                    
                 }
                 if (rectangleFeet.Intersects(GameState.platforms[i].rectangle))
                 {
