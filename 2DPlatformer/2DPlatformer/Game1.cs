@@ -18,6 +18,7 @@ namespace _2DPlatformer
         private State _currentState;
         private State _nextState;
         public static float TotalSeconds;
+        public static List<int> scores = new List<int>();
 
         public Game1()
         {

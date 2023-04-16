@@ -145,3 +145,5 @@ C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debu
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk1.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground1.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground10.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\win.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Fonts\font_smaller.xnb

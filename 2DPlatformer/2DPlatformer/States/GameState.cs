@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -27,7 +28,7 @@ namespace _2DPlatformer.States
                                 player_texture, player_walking_texture, player_jumping_texture,
                                 enemy_texture, enemy_walking_texture;
 
-        public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound;
+        public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound, win_sound;
 
         Song music;
 
@@ -68,6 +69,7 @@ namespace _2DPlatformer.States
             player_death_sound = _content.Load<SoundEffect>("Sound Effects/death2");
             enemy_death_sound = _content.Load<SoundEffect>("Sound Effects/death1");
             coin_sound = _content.Load<SoundEffect>("Sound Effects/coin01");
+            win_sound = _content.Load<SoundEffect>("Sound Effects/win");
 
             music = _content.Load<Song>("Music/game-music");
             
@@ -76,24 +78,15 @@ namespace _2DPlatformer.States
             MediaPlayer.Play(music);
 
             player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(46, 489));
-
             map = new Map();
             Map.Generate();
-
-            //player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(46, 489));
-
-            
             camera = new Camera();
-
             score_font = _content.Load<SpriteFont>("Fonts/font");
             score_pos = new Vector2(600, 489);
-
-            
-            
+            score_str = player.score.ToString();
         }
         public override void Update(GameTime gameTime)
         {
-            Debug.WriteLine(player.level);
             player.Update(gameTime);
             camera.Follow(player);
             foreach (Enemy enemy in enemies)
@@ -127,9 +120,13 @@ namespace _2DPlatformer.States
                 player.win = false;
                 player.position.X = 46;
                 player.position.Y = 489;
-                player.score = 0;
+
+                
 
                 player.level++;
+                MediaPlayer.Stop();
+                win_sound.Play();
+                Thread.Sleep(2500);
                 enemies.Clear();
                 coins.Clear();
                 platforms.Clear();
@@ -141,8 +138,10 @@ namespace _2DPlatformer.States
                     _game.ChangeState(new EndState(_game, _graphics, _content));
                     _game.IsMouseVisible = true;
                 }
-
-
+                else
+                {
+                    MediaPlayer.Play(music);
+                }
             }
         }
         public override void PostUpdate(GameTime gameTime) {   }
