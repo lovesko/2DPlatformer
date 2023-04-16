@@ -18,7 +18,7 @@ namespace _2DPlatformer
         Texture2D texture;
         public Vector2 position;
         public Vector2 velocity;
-        public Rectangle rectangle, turningRectangle, rectangleHead;
+        public Rectangle rectangle, turningRectangle, rectangleHead, rectangleRight, rectangleLeft;
         bool intersected, isGrounded;
         bool movingRight;
         public bool isDead = false;
@@ -36,8 +36,10 @@ namespace _2DPlatformer
         public void Update(GameTime gameTime)
         {
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, 5);
-            rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width + 10, 10);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, texture.Height);
+            rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, 10);
+            rectangleLeft = new Rectangle((int)position.X, (int)position.Y, 1, 1);
+            rectangleRight = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, 1);
             animation.Update();
 
             if (movingRight)
@@ -52,13 +54,13 @@ namespace _2DPlatformer
             intersected = false;
             foreach (Platform platform in GameState.platforms)
             {
-                if (turningRectangle.Intersects(platform.rectangle))
+                if (rectangleRight.Intersects(platform.rectangle) || rectangleLeft.Intersects(platform.rectangle))
+                {
+                    Turn();
+                }
+                else if (turningRectangle.Intersects(platform.rectangle))
                 {
                     intersected = true;
-                }
-                else if (rectangle.Intersects(platform.rectangle))
-                {
-                    isGrounded = false;
                 }
             }
             isGrounded = intersected;
@@ -66,16 +68,21 @@ namespace _2DPlatformer
             
             if (isGrounded == false)
             {
-                velocity.X = -velocity.X;
-                if (movingRight)
-                {
-                    movingRight = false;
-                }
+                Turn();
+            }
+        }
 
-                else if (!movingRight)
-                {
-                    movingRight = true;
-                }
+        public void Turn()
+        {
+            velocity.X = -velocity.X;
+            if (movingRight)
+            {
+                movingRight = false;
+            }
+
+            else if (!movingRight)
+            {
+                movingRight = true;
             }
         }
 

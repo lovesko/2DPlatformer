@@ -20,7 +20,7 @@ namespace _2DPlatformer
         {
             texture = newTexture;
             position = newPosition;
-            rectangle = new Rectangle((int)position.X, (int)position.Y + 1, (int)texture.Width, (int)texture.Height);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             isDeadly = deadly;
             isBreakable = breakable;
             isBouncy = bouncy;

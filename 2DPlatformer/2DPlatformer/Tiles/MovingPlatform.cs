@@ -16,9 +16,9 @@ namespace _2DPlatformer.Tiles
         public Texture2D texture;
         public Vector2 position;
         public Rectangle rectangle;
-        public float velocity = 1f;
+        public float velocity = 2f;
         public float stop = 0f;
-        public float start = 1f;
+        public float start = 2f;
 
         public MovingPlatform(Texture2D newTexture, Vector2 newPosition)
         {

@@ -54,31 +54,17 @@ namespace _2DPlatformer
 
         public void Die()
         {
-            position.Y = 0;
-            position.X = 0;
+            position.X = 46;
+            position.Y = 489;
             score = 0;
             GameState.score_str = score.ToString();
             death_sound.Play(0.1f, 0, 0);
 
-            for (int i = 0; i < GameState.enemies.Count;i++)
-            {
-                GameState.enemies.RemoveAt(i);
-            }
+            GameState.enemies.Clear();
+            GameState.coins.Clear();
+            GameState.platforms.Clear();
+            GameState.movingPlatforms.Clear();
 
-            for (int i = 0; i < GameState.coins.Count; i++)
-            {
-                GameState.coins.RemoveAt(i);
-            }
-
-            for (int i = 0; i < GameState.platforms.Count; i++)
-            {
-                GameState.platforms.RemoveAt(i);
-            }
-
-            for (int i = 0; i < GameState.movingPlatforms.Count; i++)
-            {
-                GameState.movingPlatforms.RemoveAt(i);
-            }
             Map.Generate();
         }
 
@@ -86,25 +72,10 @@ namespace _2DPlatformer
         {
             score = 0;
             GameState.score_str = score.ToString();
-            for (int i = 0; i < GameState.enemies.Count; i++)
-            {
-                GameState.enemies.RemoveAt(i);
-            }
-
-            for (int i = 0; i < GameState.coins.Count; i++)
-            {
-                GameState.coins.RemoveAt(i);
-            }
-
-            for (int i = 0; i < GameState.platforms.Count; i++)
-            {
-                GameState.platforms.RemoveAt(i);
-            }
-
-            for (int i = 0; i < GameState.movingPlatforms.Count; i++)
-            {
-                GameState.movingPlatforms.RemoveAt(i);
-            }
+            GameState.enemies.Clear();
+            GameState.coins.Clear();
+            GameState.platforms.Clear();
+            GameState.movingPlatforms.Clear();
         }
 
         public void Update(GameTime gameTime)
@@ -302,7 +273,7 @@ namespace _2DPlatformer
                     hasJumped = true;
                     velocity.Y = -7f;
                     isGrounded = false;
-                    enemy_death_sound.Play(0.6f, 0, 0);
+                    enemy_death_sound.Play(0.3f, 0, 0);
                     score += 100;
                     GameState.score_str = score.ToString();
 
