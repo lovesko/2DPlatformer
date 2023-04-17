@@ -57,7 +57,7 @@ namespace _2DPlatformer
         {
             position.X = 46;
             position.Y = 489;
-            score = 0;
+            
             GameState.score_str = score.ToString();
             death_sound.Play(0.1f, 0, 0);
 
@@ -66,12 +66,13 @@ namespace _2DPlatformer
             GameState.platforms.Clear();
             GameState.movingPlatforms.Clear();
             Map.Generate();
+            score = 0;
         } 
         public void Update(GameTime gameTime)
         {
             walk_animation.Update();
             position += velocity;
-            //Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Level: " + level);
+            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Level: " + level);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -150,7 +151,6 @@ namespace _2DPlatformer
                 if (rectangle.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture == GameState.sign_texture) // om spelaren rör en skylt ska han vinna
                 {
                     win = true;
-                    
                 }
                 if (rectangleFeet.Intersects(GameState.platforms[i].rectangle))
                 {
@@ -265,7 +265,6 @@ namespace _2DPlatformer
                     enemy_death_sound.Play(0.3f, 0, 0);
                     score += 100;
                     GameState.score_str = score.ToString();
-
                     GameState.enemies.RemoveAt(i);
                 }
                 else if (rectangle.Intersects(GameState.enemies[i].rectangle))

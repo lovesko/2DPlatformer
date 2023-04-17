@@ -105,15 +105,22 @@ namespace _2DPlatformer.States
             {
                 score_pos = new Vector2(_graphics.Viewport.Width - 100, 100);
             }
+            else if (player.position.X > 3390)
+            {
+                score_pos = new Vector2(3940, 100);
+            }
             else
             {
                 score_pos = new Vector2(player.position.X + (_graphics.Viewport.Width / 2) - 85, 100);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
+                enemies.Clear();
+                coins.Clear();
+                platforms.Clear();
+                movingPlatforms.Clear();
                 _game.ChangeState(new MenuState(_game, _graphics, _content));
                 _game.IsMouseVisible = true;
-                player.Die();
             }
             if (player.win)
             {
@@ -166,6 +173,7 @@ namespace _2DPlatformer.States
             {
                 platform.Draw(spriteBatch);
             }
+            spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
             spriteBatch.End();
         }
