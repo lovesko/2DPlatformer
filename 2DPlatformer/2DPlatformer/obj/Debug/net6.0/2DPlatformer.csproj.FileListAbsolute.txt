@@ -147,3 +147,13 @@ C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debu
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground10.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\win.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Fonts\font_smaller.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Fonts\font_smaller.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\win.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground1.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\ground10.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\cloud.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\water1.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\water2.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk2.xnb
+C:\Users\young\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk3.xnb

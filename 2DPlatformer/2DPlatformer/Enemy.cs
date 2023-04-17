@@ -23,6 +23,7 @@ namespace _2DPlatformer
         bool movingRight;
         public bool isDead = false;
         Animation animation;
+        int framesX = 10;
 
         public Enemy(Texture2D newTexture, Vector2 newPosition)
         {
@@ -30,25 +31,25 @@ namespace _2DPlatformer
             position = newPosition;
             velocity.X = 1f;
             movingRight = true;
-            animation = new Animation(texture, 11, 0.1f);
+            animation = new Animation(texture, framesX, 0.1f);
         }
 
         public void Update(GameTime gameTime)
         {
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, texture.Height);
-            rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, 10);
-            rectangleLeft = new Rectangle((int)position.X, (int)position.Y, 1, 1);
-            rectangleRight = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / 11, 1);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / framesX, texture.Height);
+            rectangleHead = new Rectangle((int)position.X + 10, (int)position.Y, (int)texture.Width / framesX - 10, 10);
+            rectangleLeft = new Rectangle((int)position.X, (int)position.Y, 1, texture.Height / 2);
+            rectangleRight = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, 1, texture.Height / 2);
             animation.Update();
 
             if (movingRight)
             {
-                turningRectangle = new Rectangle((int)position.X + texture.Width / 11, (int)position.Y, (int)texture.Width / 11, (int)texture.Height);
+                turningRectangle = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, (int)texture.Width / framesX, (int)texture.Height);
             }
             else if (!movingRight)
             {
-                turningRectangle = new Rectangle((int)position.X - texture.Width / 11, (int)position.Y, (int)texture.Width / 11, (int)texture.Height);
+                turningRectangle = new Rectangle((int)position.X - texture.Width / framesX, (int)position.Y, (int)texture.Width / framesX, (int)texture.Height);
             }
 
             intersected = false;

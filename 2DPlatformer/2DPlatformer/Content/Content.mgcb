@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:Controls/button.png
 
+#begin Fonts/Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Font.spritefont
+
 #begin Fonts/Font_larger.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -38,13 +45,6 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/font_smaller.spritefont
-
-#begin Fonts/Font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Fonts/Font.spritefont
 
 #begin Music/game-music.mp3
 /importer:Mp3Importer
@@ -87,6 +87,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound Effects/win.wav
+
+#begin Sprites/cloud.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/cloud.png
 
 #begin Sprites/coin.png
 /importer:TextureImporter
@@ -364,6 +376,42 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/walk2.png
 
+#begin Sprites/water1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/water1.png
+
+#begin Sprites/water2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/water2.png
+
+#begin Sprites/zombie-walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/zombie-walk.png
+
 #begin Sprites/zombie-walk1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -375,4 +423,28 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/zombie-walk1.png
+
+#begin Sprites/zombie-walk2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/zombie-walk2.png
+
+#begin Sprites/zombie-walk3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/zombie-walk3.png
 

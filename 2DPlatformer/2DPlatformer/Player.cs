@@ -58,7 +58,7 @@ namespace _2DPlatformer
             position.X = 46;
             position.Y = 489;
             
-            GameState.score_str = score.ToString();
+            
             death_sound.Play(0.1f, 0, 0);
 
             GameState.enemies.Clear();
@@ -67,6 +67,7 @@ namespace _2DPlatformer
             GameState.movingPlatforms.Clear();
             Map.Generate();
             score = 0;
+            GameState.score_str = score.ToString();
         } 
         public void Update(GameTime gameTime)
         {
@@ -79,6 +80,11 @@ namespace _2DPlatformer
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
             rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1);
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);
+
+            if (position.Y > 720)
+            {
+                Die();
+            }
 
             #region input
             
@@ -161,7 +167,7 @@ namespace _2DPlatformer
                     else if (GameState.platforms[i].isBouncy)
                     {
                         hasJumped = true;
-                        velocity.Y = -18f;
+                        velocity.Y = -15f;
                         isGrounded = false;
                         jump_sound.Play(0.1f, 0, 0);
                     }
@@ -283,7 +289,7 @@ namespace _2DPlatformer
                 {
                     GameState.coins.RemoveAt(i);
                     score += 50;
-                    coin_sound.Play(0.1f, 0, 0);
+                    coin_sound.Play(0.07f, 0, 0);
                     GameState.score_str = score.ToString();
                 }
             }

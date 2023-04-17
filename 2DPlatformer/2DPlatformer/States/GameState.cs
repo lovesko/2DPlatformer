@@ -22,11 +22,13 @@ namespace _2DPlatformer.States
         public static List<Enemy> enemies = new List<Enemy>();
         public static List<Coin> coins = new List<Coin>();
         public static List<MovingPlatform> movingPlatforms = new List<MovingPlatform>();
+        public static List<BackgroundTile> backgroundTiles = new List<BackgroundTile>();
 
         public static Texture2D grass2_texture, dirt_texture, grass_texture, grass3_texture, grass4_texture,
                                 spike_texture, sign_texture, spring_texture, coin_texture,
                                 player_texture, player_walking_texture, player_jumping_texture,
-                                enemy_texture, enemy_walking_texture;
+                                enemy_texture, enemy_walking_texture,
+                                cloud_texture, water1_texture, water2_texture, mushroom_texture;
 
         public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound, win_sound;
 
@@ -34,6 +36,7 @@ namespace _2DPlatformer.States
 
         SpriteFont score_font;
         public static string score_str = "0";
+        public static string youdied_str = "";
         public static Vector2 score_pos;
 
         public static Player player;
@@ -49,7 +52,7 @@ namespace _2DPlatformer.States
         {
             
 
-            player_walking_texture = _content.Load<Texture2D>("Sprites/walk2");
+            player_walking_texture = _content.Load<Texture2D>("Sprites/walk");
             player_jumping_texture = _content.Load<Texture2D>("Sprites/jump");
             player_texture = _content.Load<Texture2D>("Sprites/player");
             dirt_texture = _content.Load<Texture2D>("Sprites/ground6");
@@ -60,9 +63,13 @@ namespace _2DPlatformer.States
             spike_texture = _content.Load<Texture2D>("Sprites/spike");
             coin_texture = _content.Load<Texture2D>("Sprites/coin4");
             enemy_texture = _content.Load<Texture2D>("Sprites/slime-monster");
-            enemy_walking_texture = _content.Load<Texture2D>("Sprites/santa-walk");
+            enemy_walking_texture = _content.Load<Texture2D>("Sprites/zombie-walk");
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
             spring_texture = _content.Load<Texture2D>("Sprites/spring2");
+            cloud_texture = _content.Load<Texture2D>("Sprites/cloud");
+            water1_texture = _content.Load<Texture2D>("Sprites/water1");
+            water2_texture = _content.Load<Texture2D>("Sprites/water2");
+            mushroom_texture = _content.Load<Texture2D>("Sprites/mushroom");
 
 
             jump_sound = _content.Load<SoundEffect>("Sound Effects/jump01");
@@ -119,6 +126,7 @@ namespace _2DPlatformer.States
                 coins.Clear();
                 platforms.Clear();
                 movingPlatforms.Clear();
+                backgroundTiles.Clear();
                 _game.ChangeState(new MenuState(_game, _graphics, _content));
                 _game.IsMouseVisible = true;
             }
@@ -138,6 +146,7 @@ namespace _2DPlatformer.States
                 coins.Clear();
                 platforms.Clear();
                 movingPlatforms.Clear();
+                backgroundTiles.Clear();
                 Map.Generate();
 
                 if (player.level >= 4)
@@ -150,12 +159,17 @@ namespace _2DPlatformer.States
                     MediaPlayer.Play(music);
                 }
             }
+
         }
         public override void PostUpdate(GameTime gameTime) {   }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
+            foreach (BackgroundTile backgroundTile in backgroundTiles)
+            {
+                backgroundTile.Draw(spriteBatch);
+            }
             player.Draw(spriteBatch);
             foreach (Enemy enemy in enemies)
             {
@@ -173,7 +187,9 @@ namespace _2DPlatformer.States
             {
                 platform.Draw(spriteBatch);
             }
+            
             spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
+            spriteBatch.DrawString(score_font, youdied_str, new Vector2(1280 / 2, 720 / 2), Color.Yellow);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
             spriteBatch.End();
         }
