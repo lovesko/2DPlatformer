@@ -28,8 +28,8 @@ namespace _2DPlatformer.States
         public static Texture2D grass2_texture, dirt_texture, grass_texture, grass3_texture, grass4_texture,
                                 spike_texture, sign_texture, spring_texture, coin_texture, ladder_texture,
                                 player_texture, player_walking_texture, player_jumping_texture,
-                                enemy_texture, enemy_walking_texture,
-                                cloud_texture, water1_texture, water2_texture, mushroom_texture;
+                                enemy_walking_texture,
+                                cloud_texture, water1_texture, water2_texture, mushroom_texture, plant1_texture, plant2_texture, plant3_texture;
 
         public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound, win_sound;
 
@@ -63,15 +63,18 @@ namespace _2DPlatformer.States
             grass4_texture = _content.Load<Texture2D>("Sprites/ground14");
             spike_texture = _content.Load<Texture2D>("Sprites/spike");
             coin_texture = _content.Load<Texture2D>("Sprites/coin4");
-            enemy_texture = _content.Load<Texture2D>("Sprites/slime-monster");
             enemy_walking_texture = _content.Load<Texture2D>("Sprites/zombie-walk");
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
             spring_texture = _content.Load<Texture2D>("Sprites/spring2");
+
             cloud_texture = _content.Load<Texture2D>("Sprites/cloud");
             water1_texture = _content.Load<Texture2D>("Sprites/water1");
             water2_texture = _content.Load<Texture2D>("Sprites/water2");
             mushroom_texture = _content.Load<Texture2D>("Sprites/mushroom");
             ladder_texture = _content.Load<Texture2D>("Sprites/ladder");
+            plant1_texture = _content.Load<Texture2D>("Sprites/grass1");
+            plant2_texture = _content.Load<Texture2D>("Sprites/grass2");
+            plant3_texture = _content.Load<Texture2D>("Sprites/grass3");
 
 
             jump_sound = _content.Load<SoundEffect>("Sound Effects/jump01");
@@ -86,7 +89,7 @@ namespace _2DPlatformer.States
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(music);
 
-            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(3770, 489));
+            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(46, 489));
             map = new Map();
             Map.Generate();
             camera = new Camera();
@@ -137,9 +140,6 @@ namespace _2DPlatformer.States
                 player.win = false;
                 player.position.X = 46;
                 player.position.Y = 489;
-
-                
-
                 player.level++;
                 MediaPlayer.Stop();
                 win_sound.Play();
@@ -161,6 +161,7 @@ namespace _2DPlatformer.States
                     MediaPlayer.Play(music);
                 }
             }
+            
 
         }
         public override void PostUpdate(GameTime gameTime) {   }
@@ -193,9 +194,19 @@ namespace _2DPlatformer.States
             {
                 platform.Draw(spriteBatch);
             }
+
             spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
-            spriteBatch.DrawString(score_font, youdied_str, new Vector2(1280 / 2, 720 / 2), Color.Yellow);
+            spriteBatch.DrawString(score_font, youdied_str, new Vector2(player.position.X, 720 / 2), Color.Red);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
+
+            if (player.isDead)
+
+            {
+                spriteBatch.DrawString(score_font, youdied_str, new Vector2(player.position.X, 720 / 2), Color.Red);
+                Thread.Sleep(500);
+                youdied_str = "";
+                player.isDead = false;
+            }
             spriteBatch.End();
         }
     }

@@ -12,6 +12,7 @@ using _2DPlatformer.States;
 using _2DPlatformer.Sprites;
 using Microsoft.Xna.Framework.Audio;
 using _2DPlatformer.Tiles;
+using System.Threading;
 
 namespace _2DPlatformer
 {
@@ -31,6 +32,7 @@ namespace _2DPlatformer
         public bool win = false;
         bool justJumped = false;
         bool touchingLadder = false;
+        public bool isDead = false;
         Animation walk_animation;
 
         KeyboardState currentKeyboardState;
@@ -56,12 +58,13 @@ namespace _2DPlatformer
 
         public void Die()
         {
-            position.X = 46;
-            position.Y = 489;
-            
-            
-            death_sound.Play(0.1f, 0, 0);
+            GameState.youdied_str = "You Died";
+            isDead = true;
 
+            position.X = 46;
+            position.Y = 489;  
+            death_sound.Play(0.1f, 0, 0);
+            
             GameState.enemies.Clear();
             GameState.coins.Clear();
             GameState.platforms.Clear();
@@ -69,6 +72,7 @@ namespace _2DPlatformer
             Map.Generate();
             score = 0;
             GameState.score_str = score.ToString();
+            
         } 
         public void Update(GameTime gameTime)
         {
@@ -77,7 +81,7 @@ namespace _2DPlatformer
             Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
-            rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
+            rectangleFeet = new Rectangle((int)position.X + 15, (int)position.Y + (int)texture.Height, (int)texture.Width - 15, 1);
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
             rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1);
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);
