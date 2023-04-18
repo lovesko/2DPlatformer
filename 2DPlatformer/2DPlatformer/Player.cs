@@ -171,7 +171,7 @@ namespace _2DPlatformer
                 {
                     win = true;
                 }
-                if (rectangleFeet.Intersects(GameState.platforms[i].rectangle))
+                if (rectangleFeet.Intersects(GameState.platforms[i].rectangleTop) && velocity.Y >= 0)
                 {
                     if (GameState.platforms[i].isDeadly)
                     {
@@ -189,29 +189,30 @@ namespace _2DPlatformer
                         intersectedFeet = true;
                         hasJumped = false;
                         isGrounded = true;
-                        position.Y = GameState.platforms[i].rectangle.Top - texture.Height;
+                        if (velocity.Y >= 0)
+                        {
+                            position.Y = GameState.platforms[i].rectangle.Top - texture.Height;
+                        }
+                        
                         if (touchingLadder && Keyboard.GetState().IsKeyUp(Keys.Space))
                         {
                             velocity.Y = 0f;
                         }
                     }
                 }
-
                 if (rectangleHead.Intersects(GameState.platforms[i].rectangle))
                 {
-                    velocity.Y = 0f;
-                    position.Y += 2;
-                    if (GameState.platforms[i].isDeadly)
+                    if (!GameState.platforms[i].isOnlySolidTop)
                     {
-                        Die();
-                    }
-                    if (GameState.platforms[i].isBreakable)
-                    {
-                        GameState.platforms.RemoveAt(i);
+                        velocity.Y = 0f;
+                        position.Y += 2;
+                        if (GameState.platforms[i].isDeadly)
+                        {
+                            Die();
+                        }
                     }
                 }
-
-                if (rectangleRight.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture != GameState.sign_texture)
+                if (rectangleRight.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture != GameState.sign_texture && !GameState.platforms[i].isOnlySolidTop)
                 {
                     intersectedRight = true;
                     if (GameState.platforms[i].isDeadly)
@@ -219,7 +220,7 @@ namespace _2DPlatformer
                         Die();
                     }
                 }
-                if (rectangleLeft.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture != GameState.sign_texture)
+                if (rectangleLeft.Intersects(GameState.platforms[i].rectangle) && GameState.platforms[i].texture != GameState.sign_texture && !GameState.platforms[i].isOnlySolidTop)
                 {
                     intersectedLeft = true;
                     if (GameState.platforms[i].isDeadly)
@@ -329,7 +330,6 @@ namespace _2DPlatformer
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false && !hasJumped ||
                 Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false && !hasJumped)
             {
@@ -348,8 +348,6 @@ namespace _2DPlatformer
             {
                 spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, 1, s, 0);
             }
-            
         }
-
     }
 }

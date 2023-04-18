@@ -13,7 +13,7 @@ namespace _2DPlatformer
     {
         public Texture2D texture;
         public Vector2 position;
-        public Rectangle rectangle;
+        public Rectangle rectangle, rectangleTop;
         public bool isDeadly, isOnlySolidTop, isBouncy;
 
         public Platform(Texture2D newTexture, Vector2 newPosition, bool deadly, bool onlySolidTop, bool bouncy)
@@ -21,6 +21,7 @@ namespace _2DPlatformer
             texture = newTexture;
             position = newPosition;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
+            rectangleTop = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 30);
             isDeadly = deadly;
             isOnlySolidTop = onlySolidTop;
             isBouncy = bouncy;

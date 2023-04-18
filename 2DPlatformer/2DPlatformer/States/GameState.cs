@@ -26,7 +26,7 @@ namespace _2DPlatformer.States
         public static List<Ladder> ladders = new List<Ladder>();
 
         public static Texture2D grass2_texture, dirt_texture, grass_texture, grass3_texture, grass4_texture,
-                                spike_texture, sign_texture, spring_texture, coin_texture, ladder_texture,
+                                spike_texture, sign_texture, spring_texture, coin_texture, ladder_texture, box_texture,
                                 player_texture, player_walking_texture, player_jumping_texture,
                                 enemy_walking_texture,
                                 cloud_texture, water1_texture, water2_texture, mushroom_texture, plant1_texture, plant2_texture, plant3_texture;
@@ -66,6 +66,7 @@ namespace _2DPlatformer.States
             enemy_walking_texture = _content.Load<Texture2D>("Sprites/zombie-walk");
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
             spring_texture = _content.Load<Texture2D>("Sprites/spring2");
+            box_texture = _content.Load<Texture2D>("Sprites/box");
 
             cloud_texture = _content.Load<Texture2D>("Sprites/cloud");
             water1_texture = _content.Load<Texture2D>("Sprites/water1");
@@ -177,7 +178,6 @@ namespace _2DPlatformer.States
             {
                 ladder.Draw(spriteBatch);
             }
-            player.Draw(spriteBatch);
             foreach (Enemy enemy in enemies)
             {
                 enemy.Draw(spriteBatch);
@@ -194,7 +194,7 @@ namespace _2DPlatformer.States
             {
                 platform.Draw(spriteBatch);
             }
-
+            player.Draw(spriteBatch);
             spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
             spriteBatch.DrawString(score_font, youdied_str, new Vector2(player.position.X, 720 / 2), Color.Red);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
