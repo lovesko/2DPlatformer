@@ -30,6 +30,7 @@ namespace _2DPlatformer
         float speed = 4f;
         public bool win = false;
         bool justJumped = false;
+        bool touchingLadder = false;
         Animation walk_animation;
 
         KeyboardState currentKeyboardState;
@@ -73,7 +74,7 @@ namespace _2DPlatformer
         {
             walk_animation.Update();
             position += velocity;
-            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Level: " + level);
+            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X, (int)position.Y + (int)texture.Height, (int)texture.Width, 1);
@@ -105,7 +106,11 @@ namespace _2DPlatformer
                 velocity.X = 0;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false && justJumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && touchingLadder)
+            {
+                velocity.Y = -3f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false && justJumped == false)
             {
                 hasJumped = true;
                 velocity.Y = -10f;
@@ -116,8 +121,7 @@ namespace _2DPlatformer
             {
                 justJumped = false;
             }
-
-
+            
             //Varierande hopp beroende på hur länge man trycker Space
             currentKeyboardState = Keyboard.GetState();
             if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space) && velocity.Y < 0)
@@ -129,17 +133,22 @@ namespace _2DPlatformer
             #endregion
 
             #region gravity
-            if (hasJumped)
+            if (hasJumped && !touchingLadder)
             {
                 velocity.Y += 0.5f;
                 isGrounded = false;
+            }
+
+            if (touchingLadder && Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                velocity.Y += 0.5f;
             }
 
             if (isGrounded == false)
             {
                 hasJumped = true;
             }
-            if (isGrounded && velocity.Y >= 0)
+            if (isGrounded && velocity.Y >= 0 && !touchingLadder)
             {
                 velocity.Y = 0f;
                 
@@ -167,7 +176,7 @@ namespace _2DPlatformer
                     else if (GameState.platforms[i].isBouncy)
                     {
                         hasJumped = true;
-                        velocity.Y = -15f;
+                        velocity.Y = -18f;
                         isGrounded = false;
                         jump_sound.Play(0.1f, 0, 0);
                     }
@@ -177,6 +186,10 @@ namespace _2DPlatformer
                         hasJumped = false;
                         isGrounded = true;
                         position.Y = GameState.platforms[i].rectangle.Top - texture.Height;
+                        if (touchingLadder && Keyboard.GetState().IsKeyUp(Keys.Space))
+                        {
+                            velocity.Y = 0f;
+                        }
                     }
                 }
 
@@ -296,6 +309,19 @@ namespace _2DPlatformer
 
             #endregion
 
+            #region kollisioner med stegar
+
+            bool intersectingLadder = false;
+            foreach (Ladder ladder in GameState.ladders)
+            {
+                if (rectangle.Intersects(ladder.rectangle))
+                {
+                    intersectingLadder = true;
+                }
+            }
+            touchingLadder = intersectingLadder;
+
+            #endregion
         }
         public void Draw(SpriteBatch spriteBatch)
         {

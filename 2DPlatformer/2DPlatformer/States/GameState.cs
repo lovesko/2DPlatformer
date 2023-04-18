@@ -23,9 +23,10 @@ namespace _2DPlatformer.States
         public static List<Coin> coins = new List<Coin>();
         public static List<MovingPlatform> movingPlatforms = new List<MovingPlatform>();
         public static List<BackgroundTile> backgroundTiles = new List<BackgroundTile>();
+        public static List<Ladder> ladders = new List<Ladder>();
 
         public static Texture2D grass2_texture, dirt_texture, grass_texture, grass3_texture, grass4_texture,
-                                spike_texture, sign_texture, spring_texture, coin_texture,
+                                spike_texture, sign_texture, spring_texture, coin_texture, ladder_texture,
                                 player_texture, player_walking_texture, player_jumping_texture,
                                 enemy_texture, enemy_walking_texture,
                                 cloud_texture, water1_texture, water2_texture, mushroom_texture;
@@ -70,6 +71,7 @@ namespace _2DPlatformer.States
             water1_texture = _content.Load<Texture2D>("Sprites/water1");
             water2_texture = _content.Load<Texture2D>("Sprites/water2");
             mushroom_texture = _content.Load<Texture2D>("Sprites/mushroom");
+            ladder_texture = _content.Load<Texture2D>("Sprites/ladder");
 
 
             jump_sound = _content.Load<SoundEffect>("Sound Effects/jump01");
@@ -84,7 +86,7 @@ namespace _2DPlatformer.States
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(music);
 
-            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(46, 489));
+            player = new Player(player_texture, player_walking_texture, player_jumping_texture, new Vector2(3770, 489));
             map = new Map();
             Map.Generate();
             camera = new Camera();
@@ -170,6 +172,10 @@ namespace _2DPlatformer.States
             {
                 backgroundTile.Draw(spriteBatch);
             }
+            foreach (Ladder ladder in ladders)
+            {
+                ladder.Draw(spriteBatch);
+            }
             player.Draw(spriteBatch);
             foreach (Enemy enemy in enemies)
             {
@@ -187,7 +193,6 @@ namespace _2DPlatformer.States
             {
                 platform.Draw(spriteBatch);
             }
-            
             spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
             spriteBatch.DrawString(score_font, youdied_str, new Vector2(1280 / 2, 720 / 2), Color.Yellow);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);

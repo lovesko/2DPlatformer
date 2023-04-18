@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sprites/zombie-walk.png</SourceFile>
-  <SourceTime>2023-04-17T16:28:58.5504731+02:00</SourceTime>
+  <SourceTime>2023-04-17T17:49:39.6967709+02:00</SourceTime>
   <DestFile>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/bin/DesktopGL/Sprites/zombie-walk.xnb</DestFile>
-  <DestTime>2023-04-17T17:37:32.8418011+02:00</DestTime>
+  <DestTime>2023-04-18T15:44:11.7229963+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
