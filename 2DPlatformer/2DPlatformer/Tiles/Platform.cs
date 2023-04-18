@@ -21,7 +21,7 @@ namespace _2DPlatformer
             texture = newTexture;
             position = newPosition;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
-            rectangleTop = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 30);
+            rectangleTop = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 25);
             isDeadly = deadly;
             isOnlySolidTop = onlySolidTop;
             isBouncy = bouncy;

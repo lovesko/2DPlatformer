@@ -53,7 +53,7 @@ namespace _2DPlatformer.States
             if (button_play.clicked) //om klickar play --> spelet startar
             {
                 click_sound.Play();
-                Thread.Sleep(100);
+                Thread.Sleep(200);
                 _game.ChangeState(new GameState(_game, _graphics, _content));
                 _game.IsMouseVisible = false;
             }
@@ -62,6 +62,7 @@ namespace _2DPlatformer.States
             if (button_exit.clicked)
             {
                 click_sound.Play();
+                Thread.Sleep(200);
                 _game.Quit();  //om klickar exit --> spelet avslutas
             }
         }

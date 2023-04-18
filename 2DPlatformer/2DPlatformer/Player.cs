@@ -26,7 +26,8 @@ namespace _2DPlatformer
         public Vector2 velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
-        public int score = 0;
+        public int currentScore = 0;
+        public int savedScore = 0;
         public int level = 1;
         float speed = 4f;
         public bool win = false;
@@ -49,7 +50,6 @@ namespace _2DPlatformer
             hasJumped = true;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             walk_animation = new Animation(walking_texture, 10, 0.1f);
-
             jump_sound = GameState.jump_sound;
             enemy_death_sound = GameState.enemy_death_sound;
             coin_sound = GameState.coin_sound;
@@ -58,28 +58,23 @@ namespace _2DPlatformer
 
         public void Die()
         {
-            GameState.youdied_str = "You Died";
             isDead = true;
-
             position.X = 46;
             position.Y = 489;  
             death_sound.Play(0.1f, 0, 0);
-            
             GameState.enemies.Clear();
             GameState.coins.Clear();
             GameState.platforms.Clear();
             GameState.movingPlatforms.Clear();
             Map.Generate();
-            score = 0;
-            GameState.score_str = score.ToString();
-            
+            currentScore = savedScore;
+            GameState.score_str = currentScore.ToString();
         } 
         public void Update(GameTime gameTime)
         {
+            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
             walk_animation.Update();
             position += velocity;
-            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
-
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             rectangleFeet = new Rectangle((int)position.X + 15, (int)position.Y + (int)texture.Height, (int)texture.Width - 15, 1);
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
@@ -287,8 +282,8 @@ namespace _2DPlatformer
                     velocity.Y = -7f;
                     isGrounded = false;
                     enemy_death_sound.Play(0.3f, 0, 0);
-                    score += 100;
-                    GameState.score_str = score.ToString();
+                    currentScore += 100;
+                    GameState.score_str = currentScore.ToString();
                     GameState.enemies.RemoveAt(i);
                 }
                 else if (rectangle.Intersects(GameState.enemies[i].rectangle))
@@ -306,9 +301,9 @@ namespace _2DPlatformer
                 if (rectangle.Intersects(GameState.coins[i].rectangle))
                 {
                     GameState.coins.RemoveAt(i);
-                    score += 50;
+                    currentScore += 50;
                     coin_sound.Play(0.07f, 0, 0);
-                    GameState.score_str = score.ToString();
+                    GameState.score_str = currentScore.ToString();
                 }
             }
 

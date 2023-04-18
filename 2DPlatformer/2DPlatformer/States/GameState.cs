@@ -96,7 +96,7 @@ namespace _2DPlatformer.States
             camera = new Camera();
             score_font = _content.Load<SpriteFont>("Fonts/font");
             score_pos = new Vector2(600, 489);
-            score_str = player.score.ToString();
+            score_str = player.currentScore.ToString();
         }
         public override void Update(GameTime gameTime)
         {
@@ -142,6 +142,7 @@ namespace _2DPlatformer.States
                 player.position.X = 46;
                 player.position.Y = 489;
                 player.level++;
+                player.savedScore = player.currentScore;
                 MediaPlayer.Stop();
                 win_sound.Play();
                 Thread.Sleep(2500);
@@ -198,15 +199,6 @@ namespace _2DPlatformer.States
             spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
             spriteBatch.DrawString(score_font, youdied_str, new Vector2(player.position.X, 720 / 2), Color.Red);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
-
-            if (player.isDead)
-
-            {
-                spriteBatch.DrawString(score_font, youdied_str, new Vector2(player.position.X, 720 / 2), Color.Red);
-                Thread.Sleep(500);
-                youdied_str = "";
-                player.isDead = false;
-            }
             spriteBatch.End();
         }
     }

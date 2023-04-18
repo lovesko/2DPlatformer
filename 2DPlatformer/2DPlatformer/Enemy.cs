@@ -29,7 +29,7 @@ namespace _2DPlatformer
         {
             texture = newTexture;
             position = newPosition;
-            velocity.X = 1f;
+            velocity.X = 0.8f;
             movingRight = true;
             animation = new Animation(texture, framesX, 0.1f);
         }
