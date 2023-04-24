@@ -50,7 +50,6 @@ namespace _2DPlatformer
                 _nextState = null;
             }
             _currentState.Update(gameTime);
-            _currentState.PostUpdate(gameTime); 
             base.Update(gameTime);
         }
         public void ChangeState(State state)

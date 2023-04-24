@@ -28,7 +28,7 @@ namespace _2DPlatformer
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
         public int currentScore = 0;
         public int savedScore = 0;
-        public int level = 1;
+        public int level;
         float speed = 4f;
         public bool win = false;
         bool justJumped = false;
@@ -76,7 +76,7 @@ namespace _2DPlatformer
             walk_animation.Update();
             position += velocity;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
-            rectangleFeet = new Rectangle((int)position.X + 15, (int)position.Y + (int)texture.Height, (int)texture.Width - 15, 1);
+            rectangleFeet = new Rectangle((int)position.X + 18, (int)position.Y + (int)texture.Height, (int)texture.Width - 18, 1);
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
             rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1);
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);

@@ -33,13 +33,14 @@ namespace _2DPlatformer.States
             click_sound = _content.Load<SoundEffect>("Sound Effects/interface1");
 
             Game1.scores.Add(GameState.player.currentScore);
-            Game1.scores.Sort((a, b) => b.CompareTo(a)); //sorterar listan i storleksordning
+            Game1.scores.Sort((a, b) => b.CompareTo(a)); //Sorterar listan i storleksordning
 
-            MediaPlayer.Stop();
+            MediaPlayer.Stop(); //Stoppar musiken
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            _game.GraphicsDevice.Clear(Color.Green);
             spriteBatch.Begin();
             spriteBatch.DrawString(font_larger, "You Win!", new Vector2(1280 / 2 - 100, 150), Color.White);
             spriteBatch.DrawString(font, $"Score: {GameState.player.currentScore} ", new Vector2(1280 / 2 - 100, 250), Color.White);
@@ -54,18 +55,11 @@ namespace _2DPlatformer.States
         }
 
         public override void LoadContent()
-        {
-            
-        }
+        {}
 
-        public override void PostUpdate(GameTime gameTime)
-        {
-            
-        }
 
         public override void Update(GameTime gameTime)
         {
-            Debug.WriteLine(GameState.player.level);
             button.Update();
             if (button.clicked)
             {

@@ -19,6 +19,8 @@ namespace _2DPlatformer.States
         Texture2D button_texture;
         SoundEffect click_sound;
 
+        
+
         public static Button button_play;
         public static Button button_exit;
 
@@ -54,7 +56,17 @@ namespace _2DPlatformer.States
             {
                 click_sound.Play();
                 Thread.Sleep(200);
+                GameState.enemies.Clear();
+                GameState.coins.Clear();
+                GameState.platforms.Clear();
+                GameState.movingPlatforms.Clear();
+                GameState.backgroundTiles.Clear(); 
+
                 _game.ChangeState(new GameState(_game, _graphics, _content));
+
+                DeadState.savedPlayerScore = 0;
+                DeadState.savedPlayerLevel = 1;
+
                 _game.IsMouseVisible = false;
             }
 
@@ -66,14 +78,10 @@ namespace _2DPlatformer.States
                 _game.Quit();  //om klickar exit --> spelet avslutas
             }
         }
-        public override void PostUpdate(GameTime gameTime)
-        {
-           
-        }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            _game.GraphicsDevice.Clear(Color.Green);
             spriteBatch.Begin();
-            
             button_play.Draw(spriteBatch);
             button_exit.Draw(spriteBatch);
             spriteBatch.DrawString(font_larger, "2DPlatformer", new Vector2(1280 / 2 - 250, 150), Color.White);
@@ -82,8 +90,6 @@ namespace _2DPlatformer.States
             spriteBatch.DrawString(font_smallest, "Move Right: D / RightArrow", new Vector2(100, 205), Color.White);
             spriteBatch.DrawString(font_smallest, "Jump: Space", new Vector2(100, 225), Color.White);
             spriteBatch.DrawString(font_smallest, "Climb Ladder: Hold Space", new Vector2(100, 245), Color.White);
-
-
             spriteBatch.End();
         }
     }
