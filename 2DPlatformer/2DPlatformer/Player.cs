@@ -75,11 +75,11 @@ namespace _2DPlatformer
             Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
             walk_animation.Update();
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
-            rectangleFeet = new Rectangle((int)position.X + 18, (int)position.Y + (int)texture.Height, (int)texture.Width - 18, 1);
-            rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1);
-            rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1);
-            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height); // Rektangel för spelaren 
+            rectangleFeet = new Rectangle((int)position.X + 18, (int)position.Y + (int)texture.Height, (int)texture.Width - 18, 1); // Rektangel för spelarens botten
+            rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1); // Rektangel för spelarens topp
+            rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1); // Rektangel för spelarens vänstra sida
+            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3); //Rektangel för spelarens högra sida
 
             if (position.Y > 720)
             {
@@ -107,7 +107,7 @@ namespace _2DPlatformer
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && touchingLadder)
             {
-                velocity.Y = -3f;
+                velocity.Y = -3f; // Spelaren klättrar på stege
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false && justJumped == false)
             {

@@ -1,30 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _2DPlatformer.Sprites
 {
     public class Animation
     {
         Texture2D texture;
-        List<Rectangle> sourceRectangles = new();
+        List<Rectangle> sourceRectangles = new List<Rectangle>();
         int frames;
         int frame;
         float frameTime;
         float frameTimeLeft;
-        bool active = true;
         public Animation(Texture2D newTexture, int framesX, float newFrameTime)
         {
             texture = newTexture;
             frameTime = newFrameTime;
             frameTimeLeft = frameTime;
             frames = framesX;
-
 
             var frameWidth = texture.Width / framesX;
             var frameHeight = texture.Height;
@@ -35,32 +28,13 @@ namespace _2DPlatformer.Sprites
             }
         }
 
-        public void Stop()
-        {
-            active = false;
-        }
-
-        public void Start()
-        {
-            active = true;
-        }
-
-        public void Reset()
-        {
-            frame = 0;
-            frameTimeLeft = frameTime;
-        }
-
         public void Update()
         {
-            if (active == false) return;
-
             frameTimeLeft -= Game1.TotalSeconds;
-
             if (frameTimeLeft <= 0)
             {
                 frameTimeLeft += frameTime;
-                frame = (frame +1) % frames;
+                frame = (frame + 1) % frames;
             }
         }
 

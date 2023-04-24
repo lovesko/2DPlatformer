@@ -5,14 +5,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace _2DPlatformer.States
 {
@@ -87,7 +81,7 @@ namespace _2DPlatformer.States
             win_sound = _content.Load<SoundEffect>("Sound Effects/win");
             music = _content.Load<Song>("Music/game-music");
             
-            MediaPlayer.IsRepeating = true; //Musiken loopas
+            MediaPlayer.IsRepeating = true; // Musiken loopas
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(music);
 
@@ -105,10 +99,10 @@ namespace _2DPlatformer.States
         }
         public override void Update(GameTime gameTime)
         {
-            //Centerar spelaren
+            // Centerar spelaren
             camera.Follow(player);
 
-            //Uppdaterar objekt i spelet
+            // Uppdaterar objekt i spelet
             player.Update(gameTime);
             foreach (Enemy enemy in enemies)
             {
@@ -124,7 +118,7 @@ namespace _2DPlatformer.States
             }
 
 
-            if (player.position.X < 625) //När kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position
+            if (player.position.X < 625) // När kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position
             {
                 score_pos = new Vector2(_graphics.Viewport.Width - 100, 100);
             }
@@ -139,13 +133,14 @@ namespace _2DPlatformer.States
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
+                MediaPlayer.Stop();
                 enemies.Clear();
                 coins.Clear();
                 platforms.Clear();
                 movingPlatforms.Clear();
                 backgroundTiles.Clear();
                 _game.ChangeState(new MenuState(_game, _graphics, _content));
-                _game.IsMouseVisible = true; //Gör muspekaren synlig för menysammanhang
+                _game.IsMouseVisible = true; // Gör muspekaren synlig för menysammanhang
             }
             if (player.win)
             {
@@ -153,7 +148,7 @@ namespace _2DPlatformer.States
                 player.position.X = 46;
                 player.position.Y = 489;
                 player.level++;
-                player.savedScore = player.currentScore; //Sparar spelarens score då spelaren ska endast ska kunna förlora poängen för den aktuella leveln då han dör
+                player.savedScore = player.currentScore; // Sparar spelarens score då spelaren ska endast ska kunna förlora poängen för den aktuella leveln då han dör
                 MediaPlayer.Stop();
                 win_sound.Play();
                 Thread.Sleep(2500);

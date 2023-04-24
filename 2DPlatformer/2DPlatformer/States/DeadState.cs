@@ -18,15 +18,15 @@ namespace _2DPlatformer.States
         public static Button button_respawn;
         public static Button button_menu;
 
-        //varje gång vi går från DeadState till GameState så skapar vi ett nytt spelarobjekt i GameState. När vi skapar en ny spelare så blir spelarens level till 1 och scoret till 0 eftersom det
-        //är värdena som är givna i spelarens konstruktor. För att fixa detta så måste vi spara spelarens level och score i en separat variabel utanför spelarens konstruktor, vilket vi gör här.
-        //När vi då klickar på Respawn-knappen och går från DeadState till GameState så sparar vi spelarens tidigare värden i dessa variabler och sedan ger tillbaka dem till spelaren i GameState
-        //när spelaren respawnar.
+        // Varje gång vi går från DeadState till GameState så skapar vi ett nytt spelarobjekt i GameState. När vi skapar en ny spelare så blir spelarens level till 1 och scoret till 0 eftersom det
+        // är värdena som är givna i spelarens konstruktor. För att fixa detta så måste vi spara spelarens level och score i en separat variabel utanför spelarens konstruktor, vilket vi gör här.
+        // När vi då klickar på Respawn-knappen och går från DeadState till GameState så sparar vi spelarens tidigare värden i dessa variabler och sedan ger tillbaka dem till spelaren i GameState
+        // när spelaren respawnar.
         public static int savedPlayerLevel = 1;
         public static int savedPlayerScore = 0;
 
         SpriteFont font, font_larger;
-        Texture2D button_texture;
+        Texture2D button_texture, background;
         SoundEffect click_sound;
         public DeadState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
@@ -34,8 +34,9 @@ namespace _2DPlatformer.States
             font_larger = content.Load<SpriteFont>("Fonts/font_larger");
             button_texture = _content.Load<Texture2D>("Controls/button");
             click_sound = _content.Load<SoundEffect>("Sound Effects/interface1");
+            background = _content.Load<Texture2D>("Sprites/deadstate-background");
 
-            button_respawn = new Button(button_texture, new Vector2(Game1.screenWidth / 2 - button_texture.Width / 2, Game1.screenHeight / 2 - button_texture.Height / 2), font, "Respawn");
+            button_respawn = new Button(button_texture, new Vector2(Game1.screenWidth / 2 - button_texture.Width / 2, Game1.screenHeight / 2 - button_texture.Height / 2), font, "Retry");
             button_menu = new Button(button_texture, new Vector2(Game1.screenWidth / 2 - button_texture.Width / 2, Game1.screenHeight / 2 - button_texture.Height / 2 + 150), font, "Menu");
 
             MediaPlayer.Stop();
@@ -45,9 +46,10 @@ namespace _2DPlatformer.States
         {
             _game.GraphicsDevice.Clear(Color.Green);
             spriteBatch.Begin();
+            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             button_menu.Draw(spriteBatch);
             button_respawn.Draw(spriteBatch);
-            spriteBatch.DrawString(font_larger, "You Died!", new Vector2(1280 / 2 - 250, 150), Color.White);
+            spriteBatch.DrawString(font_larger, "You Died!", new Vector2(1280 / 2 - 150, 150), Color.Red);
             spriteBatch.End();
         }
 
@@ -59,7 +61,7 @@ namespace _2DPlatformer.States
         public override void Update(GameTime gameTime)
         {
             button_respawn.Update();
-            if (button_respawn.clicked) //om klickar play --> spelet startar
+            if (button_respawn.clicked)
             {
                 click_sound.Play();
                 Thread.Sleep(200);

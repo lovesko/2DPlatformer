@@ -1,11 +1,7 @@
-﻿using _2DPlatformer;
-using _2DPlatformer.States;
+﻿using _2DPlatformer.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Net.Mime;
 
 namespace _2DPlatformer
 {
@@ -17,7 +13,7 @@ namespace _2DPlatformer
         public static int screenHeight = 720;
         private State _currentState;
         private State _nextState;
-        public static float TotalSeconds;
+        public static float TotalSeconds; // Används för att animationer ska uppdatteras 
         public static List<int> scores = new List<int>();
 
         public Game1()

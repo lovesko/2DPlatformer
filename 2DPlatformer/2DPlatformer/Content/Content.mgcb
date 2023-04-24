@@ -137,6 +137,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/coin4.png
 
+#begin Sprites/deadstate-background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/deadstate-background.png
+
 #begin Sprites/flower_enemy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -280,6 +292,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/ladder.png
+
+#begin Sprites/menu-background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/menu-background.png
 
 #begin Sprites/mushroom.png
 /importer:TextureImporter

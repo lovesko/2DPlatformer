@@ -33,9 +33,9 @@ namespace _2DPlatformer.States
             click_sound = _content.Load<SoundEffect>("Sound Effects/interface1");
 
             Game1.scores.Add(GameState.player.currentScore);
-            Game1.scores.Sort((a, b) => b.CompareTo(a)); //Sorterar listan i storleksordning
+            Game1.scores.Sort((a, b) => b.CompareTo(a)); // Sorterar listan i storleksordning
 
-            MediaPlayer.Stop(); //Stoppar musiken
+            MediaPlayer.Stop(); // Stoppar musiken
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

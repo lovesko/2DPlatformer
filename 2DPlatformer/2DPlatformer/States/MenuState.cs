@@ -16,8 +16,9 @@ namespace _2DPlatformer.States
     public class MenuState : State
     {
         SpriteFont font, font_larger, font_smallest, font_smaller;
-        Texture2D button_texture;
+        Texture2D button_texture, background;
         SoundEffect click_sound;
+
 
         
 
@@ -35,6 +36,7 @@ namespace _2DPlatformer.States
             font_smallest = _content.Load<SpriteFont>("Fonts/font_smallest");
 
             button_texture = _content.Load<Texture2D>("Controls/button");
+            background = _content.Load<Texture2D>("Sprites/menu-background");
 
             click_sound = _content.Load<SoundEffect>("Sound Effects/interface1");
 
@@ -52,7 +54,7 @@ namespace _2DPlatformer.States
         {
             
             button_play.Update(); 
-            if (button_play.clicked) //om klickar play --> spelet startar
+            if (button_play.clicked) // Om klickar play --> spelet startar
             {
                 click_sound.Play();
                 Thread.Sleep(200);
@@ -75,13 +77,15 @@ namespace _2DPlatformer.States
             {
                 click_sound.Play();
                 Thread.Sleep(200);
-                _game.Quit();  //om klickar exit --> spelet avslutas
+                _game.Quit();  // Om klickar exit --> spelet avslutas
             }
         }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _game.GraphicsDevice.Clear(Color.Green);
+
             spriteBatch.Begin();
+            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             button_play.Draw(spriteBatch);
             button_exit.Draw(spriteBatch);
             spriteBatch.DrawString(font_larger, "2DPlatformer", new Vector2(1280 / 2 - 250, 150), Color.White);
@@ -90,6 +94,7 @@ namespace _2DPlatformer.States
             spriteBatch.DrawString(font_smallest, "Move Right: D / RightArrow", new Vector2(100, 205), Color.White);
             spriteBatch.DrawString(font_smallest, "Jump: Space", new Vector2(100, 225), Color.White);
             spriteBatch.DrawString(font_smallest, "Climb Ladder: Hold Space", new Vector2(100, 245), Color.White);
+            spriteBatch.DrawString(font_smallest, "Exit to menu: Escape", new Vector2(100, 265), Color.White);
             spriteBatch.End();
         }
     }
