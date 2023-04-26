@@ -20,7 +20,7 @@ namespace _2DPlatformer
         {
             texture = newTexture;
             position = newPosition;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width / 6, texture.Height);
             animation = new Animation(texture, 6, 0.1f);
         }
 
