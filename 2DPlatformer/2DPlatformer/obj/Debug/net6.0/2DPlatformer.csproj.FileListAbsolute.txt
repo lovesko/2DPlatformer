@@ -167,3 +167,7 @@ C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debu
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk2.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk3.xnb
 C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sprites\zombie-walk4.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\ticking_clock.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Sound Effects\ticking_clock2.xnb
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\love.ogg
+C:\Users\loveng\Documents\GitHub\2DPlatformer\2DPlatformer\2DPlatformer\bin\Debug\net6.0\Content\Music\love.xnb

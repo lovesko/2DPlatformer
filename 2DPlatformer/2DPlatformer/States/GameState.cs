@@ -31,7 +31,10 @@ namespace _2DPlatformer.States
                                 cloud_texture, water1_texture, water2_texture, mushroom_texture, plant1_texture, plant2_texture, plant3_texture;
 
         // Ljud som används i spelet
-        public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound, win_sound;
+        public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound, win_sound, clock_sound;
+
+        SoundEffectInstance clock_soundInstance;
+
 
         Song music; // Musik som spelas i spelet
 
@@ -46,7 +49,7 @@ namespace _2DPlatformer.States
 
 
         float timer = 60;
-        float currentTime = 0f;
+        bool clockSoundPlayed = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content)
             : base(game, graphics, content)
@@ -85,7 +88,9 @@ namespace _2DPlatformer.States
             enemy_death_sound = _content.Load<SoundEffect>("Sound Effects/death1");
             coin_sound = _content.Load<SoundEffect>("Sound Effects/coin01");
             win_sound = _content.Load<SoundEffect>("Sound Effects/win");
-            music = _content.Load<Song>("Music/game-music");
+            clock_sound = _content.Load<SoundEffect>("Sound Effects/ticking_clock2");
+            clock_soundInstance = clock_sound.CreateInstance(); // Krävs för att kunna stoppa ljudet
+            music = _content.Load<Song>("Music/love");
             
             MediaPlayer.IsRepeating = true; // Musiken loopas
             MediaPlayer.Volume = 0.1f;
@@ -105,11 +110,18 @@ namespace _2DPlatformer.States
         }
         public override void Update(GameTime gameTime)
         {
+
             timer_str = Math.Round(timer, 1).ToString() + "s";
             timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (timer <= 0)
             {
                 player.Die();
+                clock_soundInstance.Stop();
+            }
+            if (timer < 10 && clockSoundPlayed == false)
+            {
+                clock_soundInstance.Play();
+                clockSoundPlayed = true;
             }
 
             // Centerar spelaren
@@ -161,6 +173,7 @@ namespace _2DPlatformer.States
             if (player.win)
             {
                 timer = 60;
+                clockSoundPlayed = false;
                 player.win = false;
                 player.position.X = 46;
                 player.position.Y = 489;
