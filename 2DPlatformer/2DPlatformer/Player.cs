@@ -76,7 +76,7 @@ namespace _2DPlatformer
             walk_animation.Update();
             position += velocity;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height); // Rektangel för spelaren 
-            rectangleFeet = new Rectangle((int)position.X + 18, (int)position.Y + (int)texture.Height, (int)texture.Width - 18, 1); // Rektangel för spelarens botten
+            rectangleFeet = new Rectangle((int)position.X + 12, (int)position.Y + (int)texture.Height, (int)texture.Width - 12, 1); // Rektangel för spelarens botten
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1); // Rektangel för spelarens topp
             rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1); // Rektangel för spelarens vänstra sida
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3); //Rektangel för spelarens högra sida

@@ -5,7 +5,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace _2DPlatformer.States
@@ -34,13 +36,17 @@ namespace _2DPlatformer.States
         Song music; // Musik som spelas i spelet
 
         SpriteFont score_font;
-        public static string score_str = "0"; 
-        public static string youdied_str = "";
-        public static Vector2 score_pos;
+        public static string score_str = "0";
+        public static string timer_str = "60s";
+        public static Vector2 score_pos, timer_pos;
 
         public static Player player; // Spelarobjektet
         Map map; // Klass som sköter spelets Map-generering
         Camera camera; // Klass som sköter kamerarörelserna
+
+
+        float timer = 60;
+        float currentTime = 0f;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content)
             : base(game, graphics, content)
@@ -93,12 +99,19 @@ namespace _2DPlatformer.States
             map = new Map();
             Map.Generate();
             camera = new Camera();
+
             score_font = _content.Load<SpriteFont>("Fonts/font");
-            score_pos = new Vector2(600, 489);
             score_str = player.currentScore.ToString();
         }
         public override void Update(GameTime gameTime)
         {
+            timer_str = Math.Round(timer, 1).ToString() + "s";
+            timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (timer <= 0)
+            {
+                player.Die();
+            }
+
             // Centerar spelaren
             camera.Follow(player);
 
@@ -121,14 +134,17 @@ namespace _2DPlatformer.States
             if (player.position.X < 625) // När kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position
             {
                 score_pos = new Vector2(_graphics.Viewport.Width - 100, 100);
+                timer_pos = new Vector2(0, 100);
             }
             else if (player.position.X > 3390)
             {
                 score_pos = new Vector2(3940, 100);
+
             }
             else
             {
                 score_pos = new Vector2(player.position.X + (_graphics.Viewport.Width / 2) - 85, 100);
+                timer_pos = new Vector2(player.position.X - (_graphics.Viewport.Width / 2), 100);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -144,6 +160,7 @@ namespace _2DPlatformer.States
             }
             if (player.win)
             {
+                timer = 60;
                 player.win = false;
                 player.position.X = 46;
                 player.position.Y = 489;
@@ -206,8 +223,18 @@ namespace _2DPlatformer.States
                 platform.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
-            spriteBatch.DrawString(score_font, "Score", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
-            spriteBatch.DrawString(score_font, youdied_str, new Vector2(player.position.X, 720 / 2), Color.Red);
+            spriteBatch.DrawString(score_font, "Time:", new Vector2(timer_pos.X + 50, timer_pos.Y - 50), Color.Yellow);
+
+            if (timer > 10)
+            {
+                spriteBatch.DrawString(score_font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Yellow);
+            }
+            else
+            {
+                spriteBatch.DrawString(score_font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Red);
+            }
+
+            spriteBatch.DrawString(score_font, "Score:", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
             spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
             spriteBatch.End();
         }
