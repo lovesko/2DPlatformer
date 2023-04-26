@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _2DPlatformer.States;
+﻿using _2DPlatformer.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace _2DPlatformer.Tiles
 {
@@ -32,7 +25,7 @@ namespace _2DPlatformer.Tiles
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height);
             foreach (Platform platform in GameState.platforms)
             {
-                if (rectangle.Intersects(platform.rectangle))
+                if (rectangle.Intersects(platform.rectangle)) // Om den rörande plattformen kolliderar med en vanlig plattform byter den riktning
                 {
                     velocity = -velocity;
                     start = -start;

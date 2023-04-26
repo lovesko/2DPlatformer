@@ -1,12 +1,6 @@
-﻿using _2DPlatformer;
-using _2DPlatformer.States;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Mime;
 
 namespace _2DPlatformer.Controls
 {

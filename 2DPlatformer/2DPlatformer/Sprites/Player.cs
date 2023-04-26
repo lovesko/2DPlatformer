@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _2DPlatformer;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _2DPlatformer.States;
 using _2DPlatformer.Sprites;
 using Microsoft.Xna.Framework.Audio;
 using _2DPlatformer.Tiles;
-using System.Threading;
 
 namespace _2DPlatformer
 {
-
     public class Player
     {
         Texture2D texture, walking_texture, jumping_texture;
         SoundEffect jump_sound, enemy_death_sound, coin_sound, death_sound;
 
-        public Vector2 position;
-        public Vector2 velocity;
+        public Vector2 position, velocity;
         public bool hasJumped, isGrounded, blockedLeft, blockedRight;
         public Rectangle rectangle, rectangleFeet, rectangleHead, rectangleLeft, rectangleRight;
         public int currentScore = 0;
@@ -31,7 +21,7 @@ namespace _2DPlatformer
         public int level;
         float speed = 4f;
         public bool win = false;
-        bool justJumped = false;
+        bool justJumped = false; // Används för att ta bort förmågan att hålla in Space för att hoppa
         bool touchingLadder = false;
         public bool isDead = false;
         Animation walk_animation;
@@ -55,7 +45,6 @@ namespace _2DPlatformer
             coin_sound = GameState.coin_sound;
             death_sound = GameState.player_death_sound;
         }
-
         public void Die()
         {
             isDead = true;
@@ -72,7 +61,8 @@ namespace _2DPlatformer
         } 
         public void Update(GameTime gameTime)
         {
-            Debug.WriteLine("Position: " + position.X + "," + position.Y + "|| Velocity: " + velocity);
+            #region Uppdatering
+
             walk_animation.Update();
             position += velocity;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height); // Rektangel för spelaren 
@@ -81,13 +71,10 @@ namespace _2DPlatformer
             rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1); // Rektangel för spelarens vänstra sida
             rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3); //Rektangel för spelarens högra sida
 
-            if (position.Y > 720)
-            {
-                Die();
-            }
+            #endregion
 
-            #region input
-            
+            #region Input
+
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && blockedRight == false || 
                 Keyboard.GetState().IsKeyDown(Keys.D) && blockedRight == false)
             {
@@ -121,9 +108,9 @@ namespace _2DPlatformer
                 justJumped = false;
             }
             
-            //Varierande hopp beroende på hur länge man trycker Space
+            // Varierande hopp beroende på hur länge man trycker Space
             currentKeyboardState = Keyboard.GetState();
-            if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space) && velocity.Y < 0)
+            if (previousKeyboardState.IsKeyDown(Keys.Space) && currentKeyboardState.IsKeyUp(Keys.Space) && velocity.Y < 0) // Varje gång man släpper Space
             {
                 velocity.Y = -3f;
                 hasJumped = true;
@@ -131,7 +118,7 @@ namespace _2DPlatformer
             previousKeyboardState = currentKeyboardState;
             #endregion
 
-            #region gravity
+            #region Gravity
             if (hasJumped && !touchingLadder)
             {
                 velocity.Y += 0.5f;
@@ -150,11 +137,14 @@ namespace _2DPlatformer
             if (isGrounded && velocity.Y >= 0 && !touchingLadder)
             {
                 velocity.Y = 0f;
-                
+            }
+            if (position.Y > 720)
+            {
+                Die();
             }
             #endregion
 
-            #region kollisioner med plattformar
+            #region Kollisioner med plattformar
 
             bool intersectedFeet = false;
             bool intersectedLeft = false;
@@ -271,7 +261,7 @@ namespace _2DPlatformer
             blockedRight = intersectedRight;
             #endregion
 
-            #region kollisioner med fiender
+            #region Kollisioner med fiender
 
             for (int i = 0; i < GameState.enemies.Count; i++)
             {
@@ -294,7 +284,7 @@ namespace _2DPlatformer
 
             #endregion
 
-            #region kollisioner med coins
+            #region Kollisioner med coins
 
             for (int i = 0; i < GameState.coins.Count; i++)
             {
@@ -309,7 +299,7 @@ namespace _2DPlatformer
 
             #endregion
 
-            #region kollisioner med stegar
+            #region Kollisioner med stegar
 
             bool intersectingLadder = false;
             foreach (Ladder ladder in GameState.ladders)
@@ -333,7 +323,7 @@ namespace _2DPlatformer
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && blockedLeft == false && !hasJumped ||
                      Keyboard.GetState().IsKeyDown(Keys.A) && blockedLeft == false  && !hasJumped)
             {
-                walk_animation.Draw(position, spriteBatch, SpriteEffects.FlipHorizontally);
+                walk_animation.Draw(position, spriteBatch, SpriteEffects.FlipHorizontally); // Om man går till vänster ska spriten flippas horisontellt
             }
             else if (hasJumped)
             {

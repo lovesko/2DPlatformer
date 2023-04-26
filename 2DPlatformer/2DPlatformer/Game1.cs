@@ -13,8 +13,8 @@ namespace _2DPlatformer
         public static int screenHeight = 720;
         private State _currentState;
         private State _nextState;
-        public static float TotalSeconds; // Används för att animationer ska uppdatteras 
-        public static List<int> scores = new List<int>();
+        public static float TotalSeconds; // Används för att animationer ska uppdateras 
+        public static List<int> scores = new List<int>(); // Highscore-lista
 
         public Game1()
         {
@@ -29,23 +29,21 @@ namespace _2DPlatformer
         {
             base.Initialize();
         }
-
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _currentState = new MenuState(this, GraphicsDevice, Content);
         }
-
         protected override void Update(GameTime gameTime)
         {
             TotalSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_nextState != null)
+            if (_nextState != null) // Om nextState har ett värde ska en ny state visas
             {
                 _currentState = _nextState;
-                _currentState.LoadContent();
+                _currentState.LoadContent(); // Laddar in nya staten
                 _nextState = null;
             }
-            _currentState.Update(gameTime);
+            _currentState.Update(gameTime); // Uppdaterar aktuella staten
             base.Update(gameTime);
         }
         public void ChangeState(State state)
@@ -59,7 +57,7 @@ namespace _2DPlatformer
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.LightSkyBlue);
-            _currentState.Draw(gameTime, _spriteBatch);
+            _currentState.Draw(gameTime, _spriteBatch); // Drawar aktuella staten
             base.Draw(gameTime);
         }
     }

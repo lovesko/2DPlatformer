@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace _2DPlatformer.States
@@ -32,13 +31,12 @@ namespace _2DPlatformer.States
 
         // Ljud som används i spelet
         public static SoundEffect jump_sound, enemy_death_sound, coin_sound, player_death_sound, win_sound, clock_sound;
-
         SoundEffectInstance clock_soundInstance;
 
 
         Song music; // Musik som spelas i spelet
 
-        SpriteFont score_font;
+        SpriteFont font;
         public static string score_str = "0";
         public static string timer_str = "60s";
         public static Vector2 score_pos, timer_pos;
@@ -47,8 +45,7 @@ namespace _2DPlatformer.States
         Map map; // Klass som sköter spelets Map-generering
         Camera camera; // Klass som sköter kamerarörelserna
 
-
-        float timer = 60;
+        float timer = 60; // 60 sekunder timer
         bool clockSoundPlayed = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content)
@@ -58,7 +55,7 @@ namespace _2DPlatformer.States
         }
         public override void LoadContent()
         {
-            // Ladda in alla texturer
+            // Laddar in alla texturer
             player_walking_texture = _content.Load<Texture2D>("Sprites/walk");
             player_jumping_texture = _content.Load<Texture2D>("Sprites/jump");
             player_texture = _content.Load<Texture2D>("Sprites/player");
@@ -82,7 +79,7 @@ namespace _2DPlatformer.States
             plant2_texture = _content.Load<Texture2D>("Sprites/grass2");
             plant3_texture = _content.Load<Texture2D>("Sprites/grass3");
 
-            // Ladda in alla ljud
+            // Laddar in alla ljud
             jump_sound = _content.Load<SoundEffect>("Sound Effects/jump01");
             player_death_sound = _content.Load<SoundEffect>("Sound Effects/death2");
             enemy_death_sound = _content.Load<SoundEffect>("Sound Effects/death1");
@@ -105,12 +102,11 @@ namespace _2DPlatformer.States
             Map.Generate();
             camera = new Camera();
 
-            score_font = _content.Load<SpriteFont>("Fonts/font");
+            font = _content.Load<SpriteFont>("Fonts/font");
             score_str = player.currentScore.ToString();
         }
         public override void Update(GameTime gameTime)
         {
-
             timer_str = Math.Round(timer, 1).ToString() + "s";
             timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (timer <= 0)
@@ -142,7 +138,6 @@ namespace _2DPlatformer.States
                 platform.Update();
             }
 
-
             if (player.position.X < 625) // När kameran inte är centrerad på spelaren ska score-visaren inte vara baserad på spelarens position
             {
                 score_pos = new Vector2(_graphics.Viewport.Width - 100, 100);
@@ -159,7 +154,7 @@ namespace _2DPlatformer.States
                 timer_pos = new Vector2(player.position.X - (_graphics.Viewport.Width / 2), 100);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) // Återgår till menyn om man klickar Escape
             {
                 MediaPlayer.Stop();
                 enemies.Clear();
@@ -205,8 +200,6 @@ namespace _2DPlatformer.States
                 _game.ChangeState(new DeadState(_game, _graphics, _content));
                 _game.IsMouseVisible = true;
             }
-            
-
         }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -236,19 +229,18 @@ namespace _2DPlatformer.States
                 platform.Draw(spriteBatch);
             }
             player.Draw(spriteBatch);
-            spriteBatch.DrawString(score_font, "Time:", new Vector2(timer_pos.X + 50, timer_pos.Y - 50), Color.Yellow);
 
+            spriteBatch.DrawString(font, "Time:", new Vector2(timer_pos.X + 50, timer_pos.Y - 50), Color.Yellow);
             if (timer > 10)
             {
-                spriteBatch.DrawString(score_font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Yellow);
+                spriteBatch.DrawString(font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Yellow);
             }
-            else
+            else // Röd text om timern är under 10 sekunder
             {
-                spriteBatch.DrawString(score_font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Red);
+                spriteBatch.DrawString(font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Red);
             }
-
-            spriteBatch.DrawString(score_font, "Score:", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
-            spriteBatch.DrawString(score_font, score_str, score_pos, Color.Yellow);
+            spriteBatch.DrawString(font, "Score:", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
+            spriteBatch.DrawString(font, score_str, score_pos, Color.Yellow);
             spriteBatch.End();
         }
     }

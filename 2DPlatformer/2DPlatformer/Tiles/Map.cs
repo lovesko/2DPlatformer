@@ -13,21 +13,34 @@ namespace _2DPlatformer
 {
     public class Map
     {
-        /* 1 = kvadrat gräs.
-         * 2 = jord
-         * 3 = kvadrat gräs sluttande top-vänsterkant
-         * 4 = mynt
-         * 5 = fiende
-         * 6 = spik
-         * 7 = skylt
-         * 8 = spring
-         * 9 = rörande plattform
-         * 10 = kvadrat gräs sluttande top-högerkant
-         * 11 = stege
-         * 12 = låda
+        /* --Förgrund--:
+         * 
+         * 1 = Kvadrat gräs
+         * 2 = Jord
+         * 3 = Kvadrat gräs sluttande topp-vänsterkant
+         * 4 = Mynt
+         * 5 = Fiende
+         * 6 = Spik
+         * 7 = Skylt
+         * 8 = "Spring"
+         * 9 = Rörande plattform
+         * 10 = Kvadrat gräs sluttande topp-högerkant
+         * 11 = Stege
+         * 12 = Låda
          */
 
-        #region map layouts
+        /* --Bakgrund--:
+         * 
+         * 1 = Måln
+         * 2 = Vatten-topp
+         * 3 = Vatten-full
+         * 4 = Svamp
+         * 5 = Gräsväxt
+         * 6 = Gräsväxt 2
+         * 7 = Blommor
+         */
+
+        #region Map Layouts
 
         //"kollisionstiles", fiender etc...
         public static int[,] map_layout1 = new int[,] {
@@ -135,8 +148,6 @@ namespace _2DPlatformer
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        #endregion
-
         public static int[,] map_layout4 = new int[,]
         {
             {0,0}
@@ -146,23 +157,24 @@ namespace _2DPlatformer
             {0,0}
         };
 
+        #endregion
+
         static int currentLevel = GameState.player.level;
 
-        static int[][,] mapLayouts = { map_layout1, map_layout2, map_layout3, map_layout4 };
-        static int[][,] backgroundLayouts = { background_layout1, background_layout2, background_layout3, background_layout4};
+        static int[][,] mapLayouts = { map_layout1, map_layout2, map_layout3, map_layout4 }; // Array av alla maps
+        static int[][,] backgroundLayouts = { background_layout1, background_layout2, background_layout3, background_layout4}; // Array av alla bakgrunder
 
-        static int[,] currentMapLayout = mapLayouts[currentLevel - 1];
+        static int[,] currentMapLayout = mapLayouts[currentLevel - 1]; // Anger korrekt map beroende på spelarens level
         static int[,] currentBackgroundLayout = backgroundLayouts[currentLevel - 1];
 
         public Map() { }
-
         public static void Generate()
         {
             currentLevel = GameState.player.level;
             currentMapLayout = mapLayouts[currentLevel - 1];
             currentBackgroundLayout = backgroundLayouts[currentLevel - 1];
 
-            //Generarar förgrunden
+            // Generarar förgrunden
             for (int x = 0; x < currentMapLayout.GetLength(1); x++)
             {
                 for (int y = 0; y < currentMapLayout.GetLength(0); y++)
@@ -211,7 +223,7 @@ namespace _2DPlatformer
                 }
             }
 
-            //Genererar bakgrunden
+            // Genererar bakgrunden
             for (int x = 0; x < currentBackgroundLayout.GetLength(1); x++)
             {
                 for (int y = 0; y < currentBackgroundLayout.GetLength(0); y++)

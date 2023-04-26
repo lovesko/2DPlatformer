@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace _2DPlatformer
 {
@@ -15,6 +9,14 @@ namespace _2DPlatformer
         public Vector2 position;
         public Rectangle rectangle, rectangleTop;
         public bool isDeadly, isOnlySolidTop, isBouncy;
+
+        /*
+         * isDeadly ger en plattform som spelaren dör av att kollidera med
+         * 
+         * isOnlySolidTop ger en plattform som spelaren kan gå igenom i sidled, hoppa igenom och kan stå på
+         * 
+         * isBouncy ger en plattform som spelaren studsar på om han rör den med fötterna
+         */
 
         public Platform(Texture2D newTexture, Vector2 newPosition, bool deadly, bool onlySolidTop, bool bouncy)
         {

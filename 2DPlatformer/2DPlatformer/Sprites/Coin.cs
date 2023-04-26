@@ -16,7 +16,6 @@ namespace _2DPlatformer
         public Vector2 position;
         public Rectangle rectangle;
         Animation animation;
-
         public Coin(Texture2D newTexture, Vector2 newPosition)
         {
             texture = newTexture;

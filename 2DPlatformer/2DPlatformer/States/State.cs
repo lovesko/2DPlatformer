@@ -1,22 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _2DPlatformer.States
 {
-    public abstract class State
+    public abstract class State // Abstrakt klass då varje State ska ärva samma egenskaper (ContentManager, GraphicsDevice, Game1 och m
     {
-        protected ContentManager _content;
-
-        protected GraphicsDevice _graphics;
-
-        protected Game1 _game;
-
+        protected ContentManager _content; // ContentManager för att kunna ladda in och använda innehåll
+        protected GraphicsDevice _graphics; // GraphicsDevice för att kunna rita saker på skärmen
+        protected Game1 _game; 
         
         public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {

@@ -15,8 +15,12 @@ namespace _2DPlatformer.States
         Texture2D button_texture;
         SoundEffect click_sound;
         
-
         public EndState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
+        {
+            
+        }
+
+        public override void LoadContent()
         {
             font = _content.Load<SpriteFont>("Fonts/font");
             font_larger = _content.Load<SpriteFont>("Fonts/font_larger");
@@ -31,6 +35,17 @@ namespace _2DPlatformer.States
             MediaPlayer.Stop(); // Stoppar musiken
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            button.Update();
+            if (button.clicked)
+            {
+                click_sound.Play();
+                Thread.Sleep(100);
+                _game.ChangeState(new MenuState(_game, _graphics, _content));
+                
+            }
+        }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _game.GraphicsDevice.Clear(Color.Green);
@@ -45,22 +60,6 @@ namespace _2DPlatformer.States
             }
             button.Draw(spriteBatch);
             spriteBatch.End();
-        }
-
-        public override void LoadContent()
-        {}
-
-
-        public override void Update(GameTime gameTime)
-        {
-            button.Update();
-            if (button.clicked)
-            {
-                click_sound.Play();
-                Thread.Sleep(100);
-                _game.ChangeState(new MenuState(_game, _graphics, _content));
-                
-            }
         }
     }
 }

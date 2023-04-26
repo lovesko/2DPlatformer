@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _2DPlatformer;
-using _2DPlatformer.Sprites;
+﻿using _2DPlatformer.Sprites;
 using _2DPlatformer.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace _2DPlatformer
 {
@@ -36,6 +28,9 @@ namespace _2DPlatformer
 
         public void Update(GameTime gameTime)
         {
+
+            #region Uppdatering
+
             position += velocity;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / framesX, texture.Height);
             rectangleHead = new Rectangle((int)position.X + 10, (int)position.Y, (int)texture.Width / framesX - 10, 10);
@@ -45,12 +40,15 @@ namespace _2DPlatformer
 
             if (movingRight)
             {
-                turningRectangle = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, (int)texture.Width / framesX, (int)texture.Height);
+                // Rektangel som är fiendens bredd längre ut än fienden själv i riktningen som fienden rör sig
+                turningRectangle = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, (int)texture.Width / framesX, (int)texture.Height); 
             }
             else if (!movingRight)
             {
                 turningRectangle = new Rectangle((int)position.X - texture.Width / framesX, (int)position.Y, (int)texture.Width / framesX, (int)texture.Height);
             }
+
+            #endregion
 
             intersected = false;
             foreach (Platform platform in GameState.platforms)
@@ -65,9 +63,8 @@ namespace _2DPlatformer
                 }
             }
             isGrounded = intersected;
-
             
-            if (isGrounded == false)
+            if (isGrounded == false) // Om turningRectangle inte längre rör plattformen vänder fienden håll
             {
                 Turn();
             }
@@ -80,7 +77,6 @@ namespace _2DPlatformer
             {
                 movingRight = false;
             }
-
             else if (!movingRight)
             {
                 movingRight = true;
