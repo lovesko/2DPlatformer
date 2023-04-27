@@ -12,7 +12,7 @@ namespace _2DPlatformer.States
     {
         public static Button button_respawn;
         public static Button button_menu;
-        public static int savedPlayerLevel = 1;
+        public static int savedPlayerLevel = 2;
         public static int savedPlayerScore = 0;
 
         SpriteFont font, font_larger;

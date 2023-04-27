@@ -10,11 +10,12 @@ namespace _2DPlatformer.Controls
         Vector2 position;
         Rectangle rectangle;
         SpriteFont font;
-        MouseState lastMouseState;
+        MouseState lastMouseState, mouseState;
         public bool clicked = false;
         public string text;
 
-        Color color = Color.White;
+        Color background_color = Color.White;
+        Color text_color = Color.Black;
 
         public Button(Texture2D newTexture, Vector2 newPosition, SpriteFont newFont, string newText)
         {
@@ -27,28 +28,29 @@ namespace _2DPlatformer.Controls
 
         public void Update()
         {
-            MouseState mouseState = Mouse.GetState();
-            Rectangle cursor = new Rectangle(mouseState.X, mouseState.Y, 10, 10);
+            mouseState = Mouse.GetState();
+            Rectangle cursor = new Rectangle(mouseState.X, mouseState.Y, 10, 10); // Rektangel för muspekaren
             if (cursor.Intersects(rectangle))
             {
-                color = Color.LightGray;
-                if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+                background_color = Color.DarkGray;
+                text_color = Color.White;
+                if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released) // Om man klickar
                 {
-                    clicked = true;
+                    clicked = true; // När clicked är true hanteras händelser i klassen där knappen finns
                 }
             }
             else
             {
-                color = Color.White;
+                background_color = Color.White;
+                text_color = Color.Black;
             }
-
             lastMouseState = mouseState;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, color);
-            spriteBatch.DrawString(font, text, new Vector2(position.X + 100, position.Y + 15), Color.Black);
+            spriteBatch.Draw(texture, position, background_color);
+            spriteBatch.DrawString(font, text, new Vector2(position.X + 100, position.Y + 15), text_color);
         }
     }
 }
