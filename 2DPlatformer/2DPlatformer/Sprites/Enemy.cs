@@ -9,6 +9,7 @@ namespace _2DPlatformer
     {
         Texture2D texture;
         public Vector2 position;
+        public static float speed = 2f;
         public Vector2 velocity;
         public Rectangle rectangle, turningRectangle, rectangleHead, rectangleRight, rectangleLeft;
         bool intersected, isGrounded;
@@ -21,7 +22,7 @@ namespace _2DPlatformer
         {
             texture = newTexture;
             position = newPosition;
-            velocity.X = 2f;
+            velocity.X = speed;
             movingRight = true;
             animation = new Animation(texture, framesX, 0.1f);
         }
@@ -32,10 +33,10 @@ namespace _2DPlatformer
             #region Uppdatering
 
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width / framesX, texture.Height);
+            rectangle = new Rectangle((int)position.X + 10, (int)position.Y + 20, (int)texture.Width / framesX - 10, texture.Height);
             rectangleHead = new Rectangle((int)position.X + 10, (int)position.Y, (int)texture.Width / framesX - 10, 10);
-            rectangleLeft = new Rectangle((int)position.X, (int)position.Y, 1, texture.Height / 2);
-            rectangleRight = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, 1, texture.Height / 2);
+            rectangleLeft = new Rectangle((int)position.X, (int)position.Y, 1, texture.Height - 10);
+            rectangleRight = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, 1, texture.Height - 10);
             animation.Update();
 
             if (movingRight)

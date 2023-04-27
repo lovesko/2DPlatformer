@@ -24,7 +24,8 @@ namespace _2DPlatformer.States
 
         // Texturer som används i spelet
         public static Texture2D grass2_texture, dirt_texture, grass_texture, grass3_texture, grass4_texture,
-                                spike_texture, sign_texture, spring_texture, coin_texture, ladder_texture, box_texture,
+                                spike_texture, spike_right_texture, spike_top_texture,
+                                sign_texture, spring_texture, coin_texture, ladder_texture, box_texture,
                                 player_texture, player_walking_texture, player_jumping_texture,
                                 enemy_walking_texture,
                                 cloud_texture, water1_texture, water2_texture, mushroom_texture, plant1_texture, plant2_texture, plant3_texture;
@@ -45,7 +46,7 @@ namespace _2DPlatformer.States
         Map map; // Klass som sköter spelets Map-generering
         Camera camera; // Klass som sköter kamerarörelserna
 
-        float timer = 60; // 60 sekunder timer
+        float timer = 1000; // 60 sekunder timer
         bool clockSoundPlayed = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content)
@@ -64,7 +65,11 @@ namespace _2DPlatformer.States
             grass_texture = _content.Load<Texture2D>("Sprites/ground11");
             grass3_texture = _content.Load<Texture2D>("Sprites/ground10");
             grass4_texture = _content.Load<Texture2D>("Sprites/ground14");
-            spike_texture = _content.Load<Texture2D>("Sprites/spike");
+
+            spike_texture = _content.Load<Texture2D>("Sprites/spike2");
+            spike_right_texture = _content.Load<Texture2D>("Sprites/spike-right");
+            spike_top_texture = _content.Load<Texture2D>("Sprites/spike-top");
+
             coin_texture = _content.Load<Texture2D>("Sprites/coin4");
             enemy_walking_texture = _content.Load<Texture2D>("Sprites/zombie-walk");
             sign_texture = _content.Load<Texture2D>("Sprites/pointer2");
@@ -168,6 +173,7 @@ namespace _2DPlatformer.States
             if (player.win)
             {
                 timer = 60;
+                Enemy.speed += 0.5f; // Ökar fiendernas hastighet för varje level
                 clockSoundPlayed = false;
                 player.win = false;
                 player.position.X = 46;
@@ -182,6 +188,7 @@ namespace _2DPlatformer.States
                 platforms.Clear();
                 movingPlatforms.Clear();
                 backgroundTiles.Clear();
+                ladders.Clear();
                 Map.Generate();
 
                 if (player.level >= 4)

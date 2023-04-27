@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/Sound Effects/death2.wav</SourceFile>
   <SourceTime>2016-04-05T15:25:16+02:00</SourceTime>
   <DestFile>C:/Users/young/Documents/GitHub/2DPlatformer/2DPlatformer/2DPlatformer/Content/bin/DesktopGL/Sound Effects/death2.xnb</DestFile>
-  <DestTime>2023-04-26T19:14:53.0841829+02:00</DestTime>
+  <DestTime>2023-04-27T15:44:43.0800478+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
