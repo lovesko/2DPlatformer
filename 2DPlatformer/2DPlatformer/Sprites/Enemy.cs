@@ -33,7 +33,7 @@ namespace _2DPlatformer
             #region Uppdatering
 
             position += velocity;
-            rectangle = new Rectangle((int)position.X + 10, (int)position.Y + 20, (int)texture.Width / framesX - 10, texture.Height);
+            rectangle = new Rectangle((int)position.X + 10, (int)position.Y + 20, (int)texture.Width / framesX - 10, texture.Height - 30);
             rectangleHead = new Rectangle((int)position.X + 10, (int)position.Y, (int)texture.Width / framesX - 10, 10);
             rectangleLeft = new Rectangle((int)position.X, (int)position.Y, 1, texture.Height - 10);
             rectangleRight = new Rectangle((int)position.X + texture.Width / framesX, (int)position.Y, 1, texture.Height - 10);

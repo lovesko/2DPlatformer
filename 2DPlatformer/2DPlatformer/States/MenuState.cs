@@ -56,7 +56,7 @@ namespace _2DPlatformer.States
                 _game.ChangeState(new GameState(_game, _graphics, _content));
 
                 DeadState.savedPlayerScore = 0;
-                DeadState.savedPlayerLevel = 1;
+                DeadState.savedPlayerLevel = 2;
                 Enemy.speed = 2f; // Börjanhastighet för fiender
 
                 _game.IsMouseVisible = false;
