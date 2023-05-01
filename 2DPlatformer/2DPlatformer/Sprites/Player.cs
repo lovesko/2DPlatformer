@@ -61,15 +61,15 @@ namespace _2DPlatformer
         } 
         public void Update(GameTime gameTime)
         {
-            #region Uppdatering
+            #region Uppdatering variabler
 
             walk_animation.Update();
             position += velocity;
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, (int)texture.Height); // Rektangel för spelaren 
-            rectangleFeet = new Rectangle((int)position.X + 8, (int)position.Y + (int)texture.Height, (int)texture.Width - 8, 1); // Rektangel för spelarens botten
+            rectangleFeet = new Rectangle((int)position.X + 5, (int)position.Y + (int)texture.Height, (int)texture.Width - 5, 1); // Rektangel för spelarens botten
             rectangleHead = new Rectangle((int)position.X, (int)position.Y, (int)texture.Width, 1); // Rektangel för spelarens topp
-            rectangleLeft = new Rectangle((int)position.X - 7, (int)position.Y, 1, (int)texture.Height - 1); // Rektangel för spelarens vänstra sida
-            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 6, (int)position.Y, 1, (int)texture.Height - 3); //Rektangel för spelarens högra sida
+            rectangleLeft = new Rectangle((int)position.X - 10, (int)position.Y, 1, (int)texture.Height - 1); // Rektangel för spelarens vänstra sida
+            rectangleRight = new Rectangle((int)position.X + (int)texture.Width + 10, (int)position.Y, 1, (int)texture.Height - 3); //Rektangel för spelarens högra sida
 
             #endregion
 
