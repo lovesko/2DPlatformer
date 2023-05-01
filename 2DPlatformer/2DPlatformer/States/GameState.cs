@@ -46,7 +46,7 @@ namespace _2DPlatformer.States
         Map map; // Klass som sköter spelets Map-generering
         Camera camera; // Klass som sköter kamerarörelserna
 
-        float timer = 1000; // 60 sekunder timer
+        float timer = 100; // Timer
         bool clockSoundPlayed = false;
 
         public GameState(Game1 game, GraphicsDevice graphics, ContentManager content)
@@ -112,7 +112,7 @@ namespace _2DPlatformer.States
         }
         public override void Update(GameTime gameTime)
         {
-            timer_str = Math.Round(timer, 1).ToString() + "s";
+            timer_str = Math.Round(timer, 0).ToString() + " s";
             timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (timer <= 0)
             {
@@ -172,8 +172,8 @@ namespace _2DPlatformer.States
             }
             if (player.win)
             {
-                timer = 60;
-                Enemy.speed += 0.5f; // Ökar fiendernas hastighet för varje level
+                timer = 100;
+                Enemy.speed += 1f; // Ökar fiendernas hastighet för varje level
                 clockSoundPlayed = false;
                 player.win = false;
                 player.position.X = 46;
@@ -240,14 +240,14 @@ namespace _2DPlatformer.States
             spriteBatch.DrawString(font, "Time:", new Vector2(timer_pos.X + 50, timer_pos.Y - 50), Color.Yellow);
             if (timer > 10)
             {
-                spriteBatch.DrawString(font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Yellow);
+                spriteBatch.DrawString(font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.White);
             }
             else // Röd text om timern är under 10 sekunder
             {
                 spriteBatch.DrawString(font, timer_str, new Vector2(timer_pos.X + 50, timer_pos.Y), Color.Red);
             }
             spriteBatch.DrawString(font, "Score:", new Vector2(score_pos.X - 65, score_pos.Y - 50), Color.Yellow);
-            spriteBatch.DrawString(font, score_str, score_pos, Color.Yellow);
+            spriteBatch.DrawString(font, score_str, score_pos, Color.White);
             spriteBatch.End();
         }
     }
