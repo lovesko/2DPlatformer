@@ -12,14 +12,14 @@ namespace _2DPlatformer.Sprites
         int frame; // Aktiva framen
         float frameTime; // Hur länge varje frame ska visas
         float frameTimeLeft; 
-        public Animation(Texture2D newTexture, int framesX, float newFrameTime)
+        public Animation(Texture2D newTexture, int numberOfFrames, float newFrameTime)
         {
             texture = newTexture;
             frameTime = newFrameTime;
             frameTimeLeft = frameTime;
-            frames = framesX;
+            frames = numberOfFrames;
 
-            var frameWidth = texture.Width / framesX;
+            var frameWidth = texture.Width / numberOfFrames;
             var frameHeight = texture.Height;
 
             for (int i = 0; i < frames; i++) // Lägger till en rektangel för varje frame i spritesheet
